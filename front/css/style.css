@@ -2,77 +2,10 @@
     Styles rules 
 */
 
+@import url(/front/css/variables.css);
+
 /* Usables fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
-:root {
-    /* Palette principale (inspirée du logo) */
-    --color-primary: #1E2A38;       /* Bleu nuit (texte/logo) */
-    --color-secondary: #3F8CFF;     /* Bleu clair (accent/logo) */
-    --color-third : #1f2d4a;
-    --color-fourth : #408dd5;
-    --color-light: white;         /* Fond clair */
-    --color-dark: #111827;          /* Pour texte fort / contrasté */
-    --color-muted: #6B7280;         /* Texte secondaire / désactivé */
-    --color-border: #E5E7EB;        /* Bordures légères */
-    --color-error: #EF4444;         /* Rouge erreur */
-    --color-success: #10B981;       /* Vert succès */
-  
-    /* Background & states */
-    --bg-default: var(--color-light);
-    --bg-card: #FFFFFF;
-    --bg-hover: #F3F4F6;
-    --bg-active: var(--color-secondary);
-
-  
-    /* 🖋️ Typographie */
-    --font-primary: 'Inter', 'Roboto', sans-serif;
-    --font-secondary: 'Poppins', 'Open Sans', sans-serif;
-
-    /* 🅰️ Tailles de texte (font-size) */
-    --text-xs: 0.75rem;   /* 12px - petits labels ou aides */
-    --text-sm: 0.875rem;  /* 14px - corps de texte secondaire */
-    --text-base: 1rem;    /* 16px - texte par défaut */
-    --text-md: 1.125rem;  /* 18px - boutons larges, accents */
-    --text-lg: 1.25rem;   /* 20px - titres de sections */
-    --text-xl: 1.5rem;    /* 24px - titres de pages */
-    --text-2xl: 2rem;     /* 32px - en-têtes ou hero text */
-    --text-3xl: 2.5rem;   /* 40px - grandes accroches */
-  
-    /* 📏 Tailles standardisées */
-    --radius: 0.5rem;         /* 8px border-radius */
-    --radius-xs: 0.25rem;
-
-    /* ☁️ Ombres personnalisées */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);             /* Léger, discret */
-    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.08);             /* Standard pour les cartes */
-    --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.12);            /* Profondeur modale ou hover */
-    --shadow-xl: 0 6px 20px rgba(0, 0, 0, 0.18);            /* Flottants importants (popup/dialog) */
-    --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.06);    /* Pour effets enfoncés */
-  
-    /* Option bonus : état focus stylisé */
-    --shadow-focus: 0 0 0 3px rgba(15, 89, 220, 0.4);      /* Pour inputs focusés */
-
-    /* 📐 Espacements */
-    --spacing-xs: 0.25rem;    /* 4px */
-    --spacing-sm: 0.5rem;     /* 8px */
-    --spacing-md: 1rem;       /* 16px */
-    --spacing-lg: 2rem;       /* 32px */
-
-    /* 🟦 Coins arrondis (border-radius) */
-    --radius-none: 0px;
-    --radius-xs: 2px;
-    --radius-sm: 4px;
-    --radius-md: 8px;     /* Standard pour boutons et inputs */
-    --radius-lg: 12px;
-    --radius-xl: 16px;
-    --radius-2xl: 24px;
-    --radius-full: 9999px; /* Pour avatars, badges circulaires */
-  
-    /* 🧱 Grid / Layout */
-    --container-width: 1200px;
-    --max-width: 100%;
-  }
   
 
 *{

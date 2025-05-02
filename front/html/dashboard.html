@@ -7,17 +7,60 @@
 </head>
 <body>
     <header class="topbar">
-        <div class="menu_button">
-            <span class="l1"></span>
-            <span class="l2"></span>
-            <span class="l3"></span>
-        </div>
+        <button class="menu_button">
+            <span></span>
+        </button>
         <div class="logo">
             <img src="/assets/logo/MyPaie Logo V1.png" alt="">
         </div>
-        <div class="profile">
-
-        </div>
+        <!-- <div class="profile">
+        </div> -->
+        <nav class="navbar">
+            <li><a href="dashboard.html">Catégorie des agents</a></li>
+            <li><a href="tables.html">Tables de paie</a></li>
+            <li><a href="#">items</a></li>
+        </nav>
     </header>
+    <main>
+        <section class="categorie-list">
+            <h1 class="title">
+                Affichage des catégories des agents
+            </h1>
+            <div class="categorie-grid">
+                <div class="categorie-card">
+                    <div class="content">
+                        <li class="name">Nom de la catégorie</li>
+                        <li class="nb_agents">Nombre d'agents</li>
+                        <li class="base_salary">La valeur du salaire base</li>
+                        <li class="seuil">Valeur du seuil</li>
+                        <li class="bonus">Pourcentage de bonus</li>
+                    </div>
+                    <div class="view-button"><a href="categorie_agents.html">Voir les agents</a></div>
+                </div>
+                <div class="categorie-card">
+                    <div class="content">
+                        <li class="name">Nom de la catégorie</li>
+                        <li class="nb_agents">Nombre d'agents</li>
+                        <li class="base_salary">La valeur du salaire base</li>
+                        <li class="seuil">Valeur du seuil</li>
+                        <li class="bonus">Pourcentage de bonus</li>
+                    </div>
+                    <div class="view-button"><a href="categorie_agents.html">Voir les agents</a></div>
+                </div>
+                <div class="categorie-card">
+                    <div class="content">
+                        <li class="name">Nom de la catégorie</li>
+                        <li class="nb_agents">Nombre d'agents</li>
+                        <li class="base_salary">La valeur du salaire base</li>
+                        <li class="seuil">Valeur du seuil</li>
+                        <li class="bonus">Pourcentage de bonus</li>
+                    </div>
+                    <div class="view-button"><a href="categorie_agents.html">Voir les agents</a></div>
+                </div>
+            </div>
+            
+        </section>
+    </main>
+    <script src="/front/js/index.js"></script>
 </body>
 </html>

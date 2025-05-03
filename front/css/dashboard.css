@@ -323,6 +323,9 @@ main{
 .categorie-table th {
     background-color: #74b9ff;
     color: white;
+    text-transform: capitalize;
+    font-family: var(--font-secondary);
+    font-weight: var(--fw-regular);
 }
   
 /* button {

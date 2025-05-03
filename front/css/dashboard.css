@@ -285,3 +285,63 @@ main{
     text-transform: uppercase;
     font-size: var(--text-md);
 }
+
+/* === Tableau Dynamique === */
+.table-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    font-family: var(--font-secondary);
+}
+
+.table-container h1{
+    width: 100%;
+    height: 5%;
+    font-family: var(--font-primary);
+    font-weight: var(--fw-regular);
+    text-transform: uppercase;
+}
+
+.categorie-table{
+    width: 100%;
+    flex-grow: 1;
+    /* background-color: purple; */
+    border-collapse: collapse;
+    margin-top: 20px;
+    border: solid var(--color-black) 2px;
+}
+  
+.categorie-table th, .categorie-table td {
+    padding: var(--spacing-xs);
+    text-align: left;
+    border-bottom: 1px solid var(--color-black);
+  }
+  
+.categorie-table th {
+    background-color: #74b9ff;
+    color: white;
+}
+  
+/* button {
+    padding: 6px 12px;
+    margin-right: 6px;
+    border: none;
+    background-color: #0984e3;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+  
+  button:hover {
+    background-color: #74b9ff;
+  } */
+  
+
+.actions-buttons{
+    width: 100%;
+    height: 10%;
+    background-color: tomato;
+}

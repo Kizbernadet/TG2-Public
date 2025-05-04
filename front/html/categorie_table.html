@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affichage des categories</title>
   <link rel="stylesheet" href="../css/dashboard.css" />
 </head>
 <body>
@@ -13,8 +14,9 @@
         <div class="logo">
             <img src="/assets/logo/MyPaie Logo V1.png" alt="">
         </div>
-        <!-- <div class="profile">
-        </div> -->
+        <div class="interface-name">
+          Affichage des agents par catégorie 
+        </div>
         <nav class="navbar">
             <li><a href="dashboard.html">Catégorie des agents</a></li>
             <li><a href="tables.html">Tables de paie</a></li>
@@ -23,9 +25,6 @@
     </header>
     <main>
         <section class="table-container">
-            <h1 class="title">
-                Tables des catégories
-            </h1>
             <table id="agentTable" class="categorie-table">
                 <thead>
                   <tr>
@@ -34,45 +33,26 @@
                     <th class="base_salary">salaire</th>
                     <th class="bonus">Bonus</th>
                     <th class="turnover">Chiffre d'affaires</th>
-                    <th class="bonus">Actions</th>
+                    <th class="bonus">Salaire Total</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="table-row">
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                  </tr>
-
-                  <tr class="table-row">
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>2</td>
-                  </tr>
-
-                  <tr class="table-row">
-                    <td>3</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>3</td>
-                    <td>3</td>
-                  </tr>
                   <!-- Contenu généré dynamiquement -->
                 </tbody>
               </table>
               <div class="actions-buttons">
-                
+                <div class="functions-buttons">
+                  <button class="generate">Générer les fiches de paie</button>
+                  <button class="export">Exporter</button>
+                </div>
+                <div class="pagination-button">
+                  <button id="before-btn" class="before-btn">Precedent</button>
+                  <button id="next-btn" class="next-btn">Suivant</button>
+                </div>
               </div>
         </section>
     </main>
     <script src="/front/js/index.js"></script>
-    <!-- <script src="/front/js/addAgent.js"></script> -->
+    <script src="/front/js/addAgent.js"></script>
 </body>
 </html>

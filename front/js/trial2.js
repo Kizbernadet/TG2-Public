@@ -52,19 +52,22 @@ function clearTable() {
 
 
 function loadAgents(agentList) {
-  agentList.forEach(agent => {
-    const line = document.createElement("tr");
-    line.classList.add("table-row");
-
-    colonnes.forEach(key => {
-      const td = document.createElement("td");
-      td.textContent = agent[key];
-      line.appendChild(td);
+    agentList.forEach(agent => {
+      const line = document.createElement("tr");
+      line.classList.add("table-row");
+  
+      colonnes.forEach(key => {
+        const td = document.createElement("td");
+  
+        // Vérifier si la valeur existe, sinon ajouter une valeur par défaut
+        td.textContent = agent[key] !== undefined && agent[key] !== null ? agent[key] : "N/A";  // ou "-" selon ton choix
+        line.appendChild(td);
+      });
+  
+      table_body.appendChild(line);
     });
-
-    table_body.appendChild(line);
-  });
-}
+  }
+  
 
 
 function loadPage(pageNumber) {
@@ -78,33 +81,12 @@ function loadPage(pageNumber) {
 
   clearTable();
   loadAgents(pageAgents);
-
-  // Compléter les lignes manquantes pour atteindre agentsPerPage
-  const missingRows = agentsPerPage - pageAgents.length;
-  for (let i = 0; i < missingRows; i++) {
-    const line = document.createElement("tr");
-    line.classList.add("table-row");
-
-    // Compléter chaque colonne avec des valeurs par défaut
-    colonnes.forEach(() => {
-      const td = document.createElement("td");
-      td.textContent = "N/A"; // Ou "-" ou toute autre valeur par défaut
-      line.appendChild(td);
-    });
-
-    table_body.appendChild(line);
-  }
-
   updateButtonState(totalPages);
 }
 
-
 function updateButtonState(totalPages) {
   document.getElementById("before-btn").disabled = currentPage === 1;
-  document.getElementById("before-btn").classList.toggle("disabled");
-
   document.getElementById("next-btn").disabled = currentPage === totalPages;
-  document.getElementById("next-btn").classList.toggle("disabled");
 }
 
 // Lancement au chargement

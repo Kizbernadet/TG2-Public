@@ -203,232 +203,77 @@ body{
 
 main{
     width: 100%;
-    height: 480px;
+    height: 80%;
     padding: var(--spacing-xs) var(--spacing-md);
 }
 
-.categorie-list{
+.profil-container{
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
-    gap: var(--spacing-md);
+    align-items: top;
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
 }
 
-.categorie-list h1{
-    width: 100%;
-    height: 5%;
-    text-align: center;
-    font-family: var(--font-primary);
-    text-transform: uppercase;
-    size: var(--text-md);
-    font-weight: 600;
-    color: var(--color-secondary);
-}
-
-.categorie-list .categorie-grid{
-    width: 100%;
+.agentProfil{
     height: 85%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: var(--spacing-lg) 0;
+    flex-grow: 1;
+    padding: var(--spacing-md);
+    background-color: var(--color-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
 }
 
-.categorie-grid .categorie-card{
-    width: 25%;
+.agentProfil .profile-info{
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: left;
-    align-items: center;
-    gap: var(--spacing-sm);
+    justify-content: space-evenly;
+    align-items: left;
+}
+
+.profile-info li{
+    padding: var(--spacing-sm);
     font-family: var(--font-secondary);
     font-size: var(--text-base);
-    text-transform: uppercase;
-    font-weight: var(--fw-regular);
+    box-shadow: var(--shadow-md);
     border-radius: var(--radius-md);
-    background-color: var(--color-light);
-    box-shadow: var(--shadow-lg);
-    /* border: var(--color-secondary) solid 2px; */
-    padding: var(--spacing-sm);
-    transition: all ease-in-out 0.3s;
 }
 
-.categorie-grid .categorie-card:hover{
-    box-shadow: var(--shadow-focus);
+.profile-info li i{
+    font-size: var(--text-xl);
+    color: var(--color-secondary);
+    margin-right: var(--spacing-md);
 }
-
-.categorie-card .content{
-    width: 100%;
-    height: 10%;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: var(--spacing-xs);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-md);
-    font-family: var(--font-secondary);
-}
-
-.content li{
-    width: 100%;
-    height: max-content;
-}
-
-.categorie-card .view-button{
-    width: 100%;
-    height: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--color-secondary);
-    border-radius: var(--radius-md);
-    transition: all ease-in-out 0.3s;
-}
-
-.categorie-card .view-button:hover{
-    background-color: var(--color-success);
-}
-
-.view-button a{
-    color: var(--color-light);
-    text-transform: uppercase;
-    font-size: var(--text-md);
-}
-
-/* === Tableau Dynamique === */
-.table-container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: var(--spacing-sm);
-    font-family: var(--font-secondary);
-}
-
-.table-container h1{
-    width: 100%;
-    height: 5%;
-    font-family: var(--font-primary);
-    font-weight: var(--fw-regular);
-    font-size: var(--text-lg);
-    text-transform: uppercase;
-}
-
-.categorie-table{
-    width: 100%;
-    flex-grow: 1;
-    border-collapse: collapse;
-    border: solid var(--color-black) 2px;
-}
-
-  
-.categorie-table th {
-    background-color: #1B75C9;
-    color: white;
-    text-transform: capitalize;
-    font-family: var(--font-secondary);
-    font-weight: var(--fw-regular);
-    padding: var(--spacing-sm);
-}
-
-tbody .table-row{
-    background-color: var(--color-five);
-    border-bottom: solid transparent 2px;
-    padding: none;
-    text-align: center;
-}
-
-.table-row td {
-    overflow: hidden;
-    vertical-align: middle; /* ou top/bottom selon ce que tu veux */
-    white-space: nowrap; /* évite les retours à la ligne */
-}
-
-td.agentId:hover{
-    font-weight: var(--fw-semibold);
-    color: var(--color-light);
-    background-color: var(--color-fourth);
-    cursor: pointer;
-    transition: all ease-in-out 0.3s;
-}
-
-
-  
-  
-/* button {
-    padding: 6px 12px;
-    margin-right: 6px;
-    border: none;
-    background-color: #0984e3;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-}
-  
-  button:hover {
-    background-color: #74b9ff;
-  } */
 
 .actions-buttons{
-    width: 100%;
-    height: 7%;
+    width: 18%;
+    height: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: flex-start;
+    gap: var(--spacing-md);
+    flex-direction: column;
 }
 
 .actions-buttons button{
-    width: 100px;
-    height: 100%;
-    border-radius: var(--radius-sm);
-    font-weight: var(--fw-medium);
-    color: var(--color-black);
-    text-transform: uppercase;
+    width: 100%;
+    height: 10%;
     border: none;
+    border-radius: var(--radius-md);
+    background-color: var(--color-secondary);
+    box-shadow: var(--shadow-lg);
+    color: var(--color-light);
+    text-transform: uppercase;
     cursor: pointer;
-    transition: all ease-in-out 0.3s;
+    transition: all ease-in-out 0.2s;
 }
 
 .actions-buttons button:hover{
     font-weight: var(--fw-semibold);
-    color: var(--color-light);
-    background-color: var(--color-fourth);
-}
-
-.pagination-button{
-    width: 25%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: var(--spacing-sm);
-} 
-
-.pagination-button button{
-    font-family: var(--font-secondary);
-    text-transform: uppercase;
-}
-
-/* .pagination-button button.before-btn:hover, .pagination-button button.next-btn:hover{
-    color: var(--color-light);
-    font-weight: var(--fw-semibold);
-    background-color: var(--color-fourth);
-} */
-
-.functions-buttons{
-    flex-grow: 1;
-    height: 100%;
-}
-
-.functions-buttons button:first-child{
-    width: max-content;
-    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: #0b6dff;
 }

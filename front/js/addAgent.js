@@ -58,7 +58,20 @@ function loadAgents(agentList) {
 
     colonnes.forEach(key => {
       const td = document.createElement("td");
-      td.textContent = agent[key];
+
+      if(key === "id"){
+        td.classList.add("agentId");
+        const link = document.createElement("a");
+        link.setAttribute("href", 'profil.html');
+        link.classList.add("agent-id");
+        link.textContent = agent[key]; 
+        td.appendChild(link);
+        line.appendChild(td);
+      }
+      else{
+        td.textContent = agent[key];
+      }
+
       line.appendChild(td);
     });
 

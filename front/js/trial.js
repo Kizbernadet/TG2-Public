@@ -1,7 +1,7 @@
 // Variables utilisées 
 const table_body = document.querySelector("#agentTable tbody");
-let currentPage = 1;
-const agentsPerPage = 10;
+const currentPage = 1;
+const rowsPerPage = 10;
 
 const btnPrev = document.querySelector("#before-btn");
 const btnNext = document.querySelector("#next-btn");
@@ -29,30 +29,18 @@ const employes = [
   { id: 17, nom: "Kadidia Cissé", salaire: 320000, bonus: 15000, chiffreAffaire: 1200000, salaireTotal: 335000 },
   { id: 18, nom: "Bakary Doumbia", salaire: 300000, bonus: 12000, chiffreAffaire: 950000, salaireTotal: 312000 },
   { id: 19, nom: "Aminata Diallo", salaire: 310000, bonus: 17000, chiffreAffaire: 980000, salaireTotal: 327000 },
-  { id: 20, nom: "Oumar Sow", salaire: 360000, bonus: 28000, chiffreAffaire: 1500000, salaireTotal: 388000 }, 
-  { id: 20, nom: "Oumar Sow", salaire: 360000, bonus: 28000, chiffreAffaire: 1500000, salaireTotal: 388000 }, 
   { id: 20, nom: "Oumar Sow", salaire: 360000, bonus: 28000, chiffreAffaire: 1500000, salaireTotal: 388000 }
 ];
 
 const colonnes = ["id", "nom", "salaire", "bonus", "chiffreAffaire", "salaireTotal"];
 
-function clearTable() {
-  let firstChild;
-  while (firstChild = table_body.firstChild) {
-    if (firstChild.nodeType === Node.ELEMENT_NODE) {
-      table_body.removeChild(firstChild);
-    } else {
-      // Si ce n'est pas un élément, tu pourrais essayer de le nettoyer
-      table_body.removeChild(firstChild);
-      console.warn('Nœud non élément trouvé et supprimé');
-    }
+function clearTable(){
+  while (table_body.firstChild){
+    table_body.firstChild.removeChild(table_body.firstChild)
   }
 }
-
-
-
 function loadAgents(agentList) {
-  agentList.forEach(agent => {
+  employes.forEach(agent => {
     const line = document.createElement("tr");
     line.classList.add("table-row");
 
@@ -67,61 +55,4 @@ function loadAgents(agentList) {
 }
 
 
-function loadPage(pageNumber) {
-  const totalPages = Math.ceil(employes.length / agentsPerPage);
-  if (pageNumber < 1 || pageNumber > totalPages) return;
-
-  currentPage = pageNumber;
-  const start = (currentPage - 1) * agentsPerPage;
-  const end = start + agentsPerPage;
-  const pageAgents = employes.slice(start, end);
-
-  clearTable();
-  loadAgents(pageAgents);
-
-  // Compléter les lignes manquantes pour atteindre agentsPerPage
-  const missingRows = agentsPerPage - pageAgents.length;
-  for (let i = 0; i < missingRows; i++) {
-    const line = document.createElement("tr");
-    line.classList.add("table-row");
-
-    // Compléter chaque colonne avec des valeurs par défaut
-    colonnes.forEach(() => {
-      const td = document.createElement("td");
-      td.textContent = "N/A"; // Ou "-" ou toute autre valeur par défaut
-      line.appendChild(td);
-    });
-
-    table_body.appendChild(line);
-  }
-
-  updateButtonState(totalPages);
-}
-
-
-function updateButtonState(totalPages) {
-  document.getElementById("before-btn").disabled = currentPage === 1;
-  document.getElementById("before-btn").classList.toggle("disabled");
-
-  document.getElementById("next-btn").disabled = currentPage === totalPages;
-  document.getElementById("next-btn").classList.toggle("disabled");
-}
-
-// Lancement au chargement
-// Événement DOM prêt
-window.onload = () => {
-  const prevButton = document.getElementById("before-btn");
-  const nextButton = document.getElementById("next-btn");
-
-  prevButton.addEventListener("click", () => {
-    loadPage(currentPage - 1);
-  });
-
-  nextButton.addEventListener("click", () => {
-    loadPage(currentPage + 1);
-  });
-
-  // Chargement initial
-  loadPage(currentPage);
-};
-
+window.onload = loadAgents;

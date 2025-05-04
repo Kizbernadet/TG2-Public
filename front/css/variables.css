@@ -5,7 +5,8 @@
   --color-primary: #1E2A38;
   --color-secondary: #3F8CFF;
   --color-third : #1f2d4a;
-  --color-fourth : #408dd5;
+  --color-fourth : #1B75C9;
+  --color-five : #d6eaf8;
   --color-light: white;
   --color-dark: #111827;
   --color-muted: #6B7280;
@@ -20,7 +21,7 @@
   --bg-active: var(--color-secondary);
 
   /* Containers dimensions */
-  --topbar-height : 70px;
+  --topbar-height : 60px;
 
   /* 🖋️ Typographie */
   --font-primary: 'Montserrat', 'Roboto', sans-serif;
@@ -36,7 +37,7 @@
   --fw-extra-light: 200;
   --fw-light: 300;
   --fw-regular: 400;
-  --fw-medium: 500;
+  --fw-medium: 550;
   --fw-semibold: 600;
   --fw-bold: 700;
   --fw-extra-bold: 800;

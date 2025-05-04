@@ -73,23 +73,33 @@ body{
     /* transform: scale(1.5); */
 }
 
-.topbar .profile{
-    width: 200px;
-    height: 100%;
-    background-color: var(--color-secondary);
+.topbar .interface-name{
+    width: 38%;
+    height: 30px;
+    line-height: 2rem;
+    font-size: var(--text-lg);
+    font-family: var(--font-primary);
+    color: var(--color-third);
+    text-align: center;
+    text-transform: uppercase;
+    border-left: solid var(--color-secondary) 2px;
+    margin-left: calc(var(--spacing-lg) * 2);
+    padding: 0 var(--spacing-md);
+    font-weight: var(--fw-medium);
+    white-space: nowrap;
 }
 
 .topbar .menu_button{
     /* position: relative; */
-    width: 45px;
-    height: 45px;
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: none;
     background-color: var(--color-secondary);
     align-items: center;
-    padding: var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-xs);
     border-radius: var(--radius-xs);
 }
 
@@ -100,9 +110,9 @@ body{
     top: 50%; */
     transform: translateY(-50%);
     width: 98%;
-    height: 3px;
+    height: 2.8px;
     background-color: var(--color-light);
-    /* border-radius: var(--radius-full); */
+    border-radius: var(--radius-xs);
     transition: all ease-in 0.3s;
 }
 
@@ -111,16 +121,17 @@ body{
     left: 50%;
     content: "";
     width: 100%;
-    height: 3px;
+    height: 2.8px;
     background-color: var(--color-light);
+    border-radius: var(--radius-xs);
 }
 
 .menu_button span::after{
-    transform: translate(-50%, -12px);
+    transform: translate(-50%, -10px);
 }
 
 .menu_button span::before{
-    transform: translate(-50%, 12px);
+    transform: translate(-50%, 10px);
 }
 
 .menu_button.active{
@@ -193,7 +204,7 @@ body{
 main{
     width: 100%;
     height: 480px;
-    padding: var(--spacing-md);
+    padding: var(--spacing-xs) var(--spacing-md);
 }
 
 .categorie-list{
@@ -201,7 +212,7 @@ main{
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     gap: var(--spacing-md);
 }
@@ -212,7 +223,7 @@ main{
     text-align: center;
     font-family: var(--font-primary);
     text-transform: uppercase;
-    size: var(--text-base);
+    size: var(--text-md);
     font-weight: 600;
     color: var(--color-secondary);
 }
@@ -227,13 +238,17 @@ main{
 }
 
 .categorie-grid .categorie-card{
-    width: 24%;
+    width: 25%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: left;
     align-items: center;
     gap: var(--spacing-sm);
+    font-family: var(--font-secondary);
+    font-size: var(--text-base);
+    text-transform: uppercase;
+    font-weight: var(--fw-regular);
     border-radius: var(--radius-md);
     background-color: var(--color-light);
     box-shadow: var(--shadow-lg);
@@ -294,6 +309,7 @@ main{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    gap: var(--spacing-sm);
     font-family: var(--font-secondary);
 }
 
@@ -302,38 +318,43 @@ main{
     height: 5%;
     font-family: var(--font-primary);
     font-weight: var(--fw-regular);
+    font-size: var(--text-lg);
     text-transform: uppercase;
 }
 
 .categorie-table{
     width: 100%;
     flex-grow: 1;
-    /* background-color: purple; */
     border-collapse: collapse;
-    margin-top: 20px;
     border: solid var(--color-black) 2px;
 }
-  
-/* .categorie-table th, .categorie-table td {
-    padding: var(--spacing-xs);
-    text-align: left;
-    border-bottom: 1px solid var(--color-black);
-  } */
+
   
 .categorie-table th {
-    background-color: #74b9ff;
+    background-color: #1B75C9;
     color: white;
     text-transform: capitalize;
     font-family: var(--font-secondary);
     font-weight: var(--fw-regular);
+    padding: var(--spacing-sm);
 }
 
-tbody .table-row td{
-    height: 5px;
-    background-color: pink;
-    border: solid black 2px;
+tbody .table-row{
+    min-height: 10px;
+    background-color: var(--color-five);
+    border-bottom: solid transparent 2px;
     padding: none;
+    text-align: center;
 }
+
+.table-row td {
+    width: 20px;
+    min-height: 10px;
+    overflow: hidden;
+    vertical-align: middle; /* ou top/bottom selon ce que tu veux */
+    white-space: nowrap; /* évite les retours à la ligne */
+}
+  
   
 /* button {
     padding: 6px 12px;
@@ -348,10 +369,59 @@ tbody .table-row td{
   button:hover {
     background-color: #74b9ff;
   } */
-  
 
-/* .actions-buttons{
+.actions-buttons{
     width: 100%;
-    height: 10%;
-    background-color: tomato;
+    height: 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actions-buttons button{
+    width: 100px;
+    height: 100%;
+    border-radius: var(--radius-sm);
+    font-weight: var(--fw-medium);
+    color: var(--color-black);
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+}
+
+.actions-buttons button:hover{
+    font-weight: var(--fw-semibold);
+    color: var(--color-light);
+    background-color: var(--color-fourth);
+}
+
+.pagination-button{
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--spacing-sm);
+} 
+
+.pagination-button button{
+    font-family: var(--font-secondary);
+    text-transform: uppercase;
+}
+
+/* .pagination-button button.before-btn:hover, .pagination-button button.next-btn:hover{
+    color: var(--color-light);
+    font-weight: var(--fw-semibold);
+    background-color: var(--color-fourth);
 } */
+
+.functions-buttons{
+    flex-grow: 1;
+    height: 100%;
+}
+
+.functions-buttons button:first-child{
+    width: max-content;
+    padding: var(--spacing-xs) var(--spacing-sm);
+}

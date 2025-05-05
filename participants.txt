@@ -2,4 +2,8 @@ kiz : c'est ok pour moi !
 Drm : good
 Folé : ohhh it's so great!!!!!
 Tall : Salam vous allez bien !??
+<<<<<<< HEAD
 Maria : Allons y encore une foiss
+=======
+Maria : anw ka essayer toukouni
+>>>>>>> 6eef246dfc6f11feaada0e486afc591bf9226165

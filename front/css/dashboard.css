@@ -21,7 +21,7 @@ li{
 
 a{
     font-family: var(--font-secondary);
-    color: var(--color-black);
+    color: var(--color-dark);
     text-transform: none;
     text-decoration: none;
 }
@@ -350,6 +350,11 @@ tbody .table-row{
     overflow: hidden;
     vertical-align: middle; /* ou top/bottom selon ce que tu veux */
     white-space: nowrap; /* évite les retours à la ligne */
+    border-right: solid 2px transparent;
+}
+
+td.agentId{
+    width: 5%;
 }
 
 td.agentId:hover{
@@ -390,7 +395,7 @@ td.agentId:hover{
     height: 100%;
     border-radius: var(--radius-sm);
     font-weight: var(--fw-medium);
-    color: var(--color-black);
+    color: var(--color-dark);
     text-transform: uppercase;
     border: none;
     cursor: pointer;

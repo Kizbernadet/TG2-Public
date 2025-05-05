@@ -251,7 +251,7 @@ main{
 }
 
 .actions-buttons{
-    width: 18%;
+    width: 20%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -266,14 +266,15 @@ main{
     border: none;
     border-radius: var(--radius-md);
     background-color: var(--color-secondary);
+    padding: var(--spacing-sm);
     box-shadow: var(--shadow-lg);
     color: var(--color-light);
+    font-weight: var(--fw-semibold);
     text-transform: uppercase;
     cursor: pointer;
     transition: all ease-in-out 0.2s;
 }
 
 .actions-buttons button:hover{
-    font-weight: var(--fw-semibold);
     background-color: #0b6dff;
 }

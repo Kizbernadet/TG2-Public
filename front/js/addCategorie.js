@@ -11,6 +11,8 @@ function loadCategorie(objects){
     for (item in objects){
         const data = objects[item];
         const key_list = Object.keys(data);
+        console.log(key_list);
+
         const values = Object.values(data)
         values.splice(0, 1);
         key_list.splice(0, 1)
@@ -35,6 +37,7 @@ function loadCategorie(objects){
             else {
                 li.textContent = `${key} : ${values[value_index]}`;
             }
+            
             content.appendChild(li);
         }
         
@@ -67,7 +70,7 @@ document.addEventListener("click", (event) => {
 
         // Redirige vers la page de la catégorie
         //window.location.href = "categorie_table.html";
-        window.location.href = `categorie_table.html`
+        window.location.href = `agents.html`
         }
     }
 });
@@ -77,6 +80,7 @@ function init() {
     fetch(api_url)
         .then((response) => response.json())
         .then((data) => {
+            console.log("Response : ", data.categories);
             loadCategorie(data.categories);
         })
         .catch((error) => {

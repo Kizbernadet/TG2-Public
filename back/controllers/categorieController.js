@@ -6,7 +6,7 @@ const categorieService = require('../services/categorie.service.js');
 exports.getAllCategories = async (req, res) => {
     try{
         const categories = await categorieService.getAll();
-        res.status(200).json(categoriesObject);
+        res.status(200).json({categories});
 
     } catch(error){
         console.error("Erreur de récupération categories : ", error);

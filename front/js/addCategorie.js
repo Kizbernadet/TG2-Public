@@ -26,6 +26,7 @@ function loadCategorie(objects){
             let value_index = key_list.indexOf(key);
 
             const li = document.createElement('li');
+            li.classList.add(`${key}`)
             if (key === "bonus") {
                 li.textContent = `${key} : ${values[value_index]} %`;
             }
@@ -54,11 +55,20 @@ function loadCategorie(objects){
 document.addEventListener("click", (event) => {
     if (event.target.matches(".view-button")) {
         const categoryCard = event.target.closest(".categorie-card");
+        console.log(categoryCard)
+        const li = categoryCard.querySelector(".nom");
+        const categoryName = li ? li.textContent.split(":")[1].trim() : null;
         const categoryId = categoryCard ? categoryCard.id : null;
-        console.log(`id : ${categoryId}`);
+        console.log(categoryName)
+
+        const categoryData = {
+            id : categoryId, 
+            name : categoryName
+        }
 
         if (categoryId) {
-            localStorage.setItem("selectedCategoryId", categoryId);
+            console.log(typeof categoryData);
+            localStorage.setItem("selectedCategory", JSON.stringify(categoryData));
             window.open("agents.html"); // ouverture dans un nouvel onglet
         }
     }
@@ -69,7 +79,6 @@ function init() {
     fetch(api_url)
         .then((response) => response.json())
         .then((data) => {
-            console.log("Response : ", data.categories);
             loadCategorie(data.categories);
         })
         .catch((error) => {

@@ -34,11 +34,7 @@ function loadAgents(agentList) {
 
       if (key === "id") {
         td.classList.add("agentId");
-        const link = document.createElement("a");
-        link.setAttribute("href", "profil.html");
-        link.classList.add("agent-id");
-        link.textContent = agent[key];
-        td.appendChild(link);
+        td.textContent = agent[key];
       } else {
         td.textContent = agent[key];
       }
@@ -90,6 +86,18 @@ function updateButtonState(totalPages) {
   btnNext.classList.toggle("disabled", currentPage === totalPages);
 }
 
+// ==== Récupérer l'idenfiant d'un agent ====
+document.addEventListener("click", (event) => {
+  if (event.target.matches(".agentId")) {
+    event.preventDefault();
+    
+    const agentId = event.target.textContent;
+    localStorage.setItem("selectedAgentId", JSON.stringify({id: agentId}));
+    window.location.href = "profile.html"; // ou la page souhaitée
+  }
+});
+
+
 // === 🌐 Récupère les agents de la catégorie sélectionnée ===
 document.addEventListener("DOMContentLoaded", async () => {
   const categoryData = JSON.parse(localStorage.getItem("selectedCategory"));
@@ -97,7 +105,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const categoyName = categoryData.name;
 
 
-  localStorage.removeItem("selectedCategory")
+  //localStorage.removeItem("selectedCategory")
 
   if (!categoryId) {
     console.error("Catégorie non sélectionnée.");

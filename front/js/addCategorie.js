@@ -68,8 +68,9 @@ document.addEventListener("click", (event) => {
 
         if (categoryId) {
             console.log(typeof categoryData);
+            
             localStorage.setItem("selectedCategory", JSON.stringify(categoryData));
-            window.open("agents.html"); // ouverture dans un nouvel onglet
+            window.location.href = "agents.html";
         }
     }
 });

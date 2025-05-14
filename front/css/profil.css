@@ -219,12 +219,13 @@ main{
 }
 
 .agentProfil{
-    height: 85%;
+    height: 95%;
     flex-grow: 1;
     padding: var(--spacing-md);
     background-color: var(--color-light);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
+
 }
 
 .agentProfil .profile-info{
@@ -248,6 +249,18 @@ main{
     font-size: var(--text-xl);
     color: var(--color-secondary);
     margin-right: var(--spacing-md);
+}
+
+.profile-info li span{
+    text-transform: capitalize;
+}
+
+.profile-info li i.active_status{
+    color : var(--color-success);
+}
+
+.profile-info li i.passive_status{
+    color : var(--color-error);
 }
 
 .actions-buttons{

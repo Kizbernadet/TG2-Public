@@ -1,4 +1,4 @@
-/* LuxeCar Script Code */
+/* Script Code */
 const burger_button = document.querySelector(".menu_button")
 const navbar = document.querySelector(".navbar") 
 

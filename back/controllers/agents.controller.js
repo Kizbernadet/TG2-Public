@@ -30,3 +30,25 @@ exports.getAgentsByCategory = async (req, res) => {
   }
 };
 
+exports.getAgentProfile = async (req, res) => {
+  const agentId = req.params.id;
+
+  if (!agentId) {
+    return res.status(400).json({ erreur: "ID de l'agent manquant" });
+  }
+
+  try {
+    const agent = await agentService.getAgentProfile(agentId);
+
+    if (!agent) {
+      return res.status(404).json({ erreur: "Agent non trouvé" });
+    }
+
+    res.status(200).json(agent);
+  } catch (error) {
+    console.error("Erreur récupération des informations de l'agent", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+};
+
+

@@ -24,6 +24,7 @@ const PaieController = require('./controllers/paie.controller');
 
 // Routes agents
 app.use('/api/agents', agentRoutes);
+// app.use('api/agents/:categoryId', agentsRoutes.)
 
 // Routes catégories
 app.use('/api/categories', categorieRoutes);
@@ -42,6 +43,20 @@ app.get('/', (req, res) => {
 // 8. Gestion des 404
 app.use((req, res) => {
   res.status(404).json({ message: 'Ressource non trouvée' });
+});
+
+// Middleware de gestion des erreurs
+/**
+ * Ce middleware capte toutes les erreurs non gérées dans tes contrôleurs, services, etc., et :
+ * affiche les détails techniques dans ta console renvoie une réponse JSON propre côté client
+ */
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Affiche la pile d'erreurs dans la console
+
+  res.status(500).json({
+    message: 'Erreur serveur',
+    details: err.message
+  });
 });
 
 // 9. Démarrer le serveur

@@ -15,11 +15,11 @@
             <img src="/assets/logo/mypay logo II.png" alt="">
         </div>
         <div class="interface-name">
-          Affichage des agents par catégorie - <span class="agentCategorie"><!-- Ajouter dynamiquement --></span>
+          Affichage des agents de la categorie - <span id="categoryName"><!-- Ajouter dynamiquement --></span>
         </div>
         <nav class="navbar">
-            <li><a href="dashboard.html">Catégorie des agents</a></li>
-            <li><a href="tables.html">Tables de paie</a></li>
+            <li><a href="categories.html">Catégorie des agents</a></li>
+            <li><a href="paies.html">Tables de paie</a></li>
             <li><a href="#">items</a></li>
         </nav>
     </header>
@@ -30,10 +30,10 @@
                   <tr>
                     <th class="id">ID</th>
                     <th class="name">Nom</th>
-                    <th class="base_salary">salaire</th>
-                    <th class="bonus">Bonus</th>
-                    <th class="turnover">Chiffre d'affaires</th>
-                    <th class="bonus">Salaire Total</th>
+                    <th class="firstname">Prenom</th>
+                    <th class="diplome">Diplome</th>
+                    <th class="basic_salary">salaire</th>
+                    <th class="recruitment_date">recrutement</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -53,6 +53,6 @@
         </section>
     </main>
     <script src="/front/js/index.js"></script>
-    <!-- <script src="/front/js/addAgent.js"></script> -->
+    <script src="/front/js/addAgent.js"></script>
 </body>
 </html>

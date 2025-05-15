@@ -3,13 +3,13 @@
 :root {
   /* Palette principale (inspirée du logo) */
   --color-primary: #1E2A38;
-  --color-secondary: #3F8CFF;
+  --color-secondary: #3b77d1;
   --color-third : #1f2d4a;
-  --color-fourth : #1B75C9;
+  --color-fourth : rgb(32, 19, 212);
   --color-five : #d6eaf8;
   --color-light: white;
   --color-dark: #111827;
-  --color-muted: #6B7280;
+  --color-muted: #3b77d1;
   --color-border: #E5E7EB;
   --color-error: #EF4444;
   --color-success: #10B981;
@@ -31,6 +31,8 @@
   --font-exo2: 'Exo 2', sans-serif;
   --font-lato: 'Lato', sans-serif;
   --font-outfit: 'Outfit', sans-serif;
+
+  /* aide moi a creer la table users avec : id, matricule(qu'on doit formater en format  */
 
   /* 💪 Poids de police */
   --fw-thin: 100;
@@ -61,7 +63,7 @@
   --shadow-inset: inset 0 1px 2px rgba(0, 0, 0, 0.06);
 
   /* Option bonus : état focus stylisé */
-  --shadow-focus: 0 0 0 3px rgba(15, 89, 220, 0.4);
+  --shadow-focus: 0 0 0 3px rgba(32, 19, 212, 0.6);
 
   /* 📐 Espacements */
   --spacing-xs: 0.25rem;

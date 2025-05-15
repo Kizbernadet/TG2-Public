@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil Agent</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../css/profil.css" />
+</head>
+<body>
+    <header class="topbar">
+        <button class="menu_button">
+            <span></span>
+        </button>
+        <div class="logo">
+            <img src="/assets/logo/MyPaie Logo V1.png" alt="">
+        </div>
+        <div class="interface-name">
+            Profil Agent
+          </div>
+
+        <nav class="navbar">
+            <li><a href="dashboard.html">Catégorie des agents</a></li>
+            <li><a href="tables.html">Tables de paie</a></li>
+            <li><a href="#">items</a></li>
+        </nav>
+    </header>
+    <main>
+        <section class="profil-container">
+            <div class="agentProfil">
+                <ul class="profile-info"></ul>
+            </div>
+            <div class="actions-buttons">
+                <button class="addPaySlip"><i class="fa-solid fa-plus"></i> Générer une fiche</button>
+                <button class="viewPaySlip"><i class="fa-solid fa-eye"></i> Voir les fiches existantes</button>
+                <button class="deletePaySlip"><i class="fa-solid fa-trash"></i> Supprimer / Modifier une fiche</button>
+            </div>
+        </section>
+    </main>
+    <script src="/front/js/index.js"></script>
+    <script src="/front/js/profil.js"></script>
+</body>
+</html>

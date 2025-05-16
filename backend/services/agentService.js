@@ -22,7 +22,7 @@ exports.getAgentById = async (agentId) => {
     return rows[0];
 };
 
-// agentService.js
+// Récupérer les donnees d'un agent spécifier par ID
 exports.getAgentProfil = async (agentId) => {
   const [rows] = await db.query(
     `SELECT a.id, a.nom, a.prenom, a.date_recrutement, a.salaire_base, c.nom AS categorie, s.montant, 
@@ -36,4 +36,13 @@ exports.getAgentProfil = async (agentId) => {
   );
   if (rows.length === 0) throw new Error('Agent non trouvé');
   return rows[0];
+};
+
+// Récupérer les donnes sur l'agent
+exports.checkFichePaie = async (agentId, mois, annee) => {
+  const [rows] = await db.query(
+  `SELECT 1 FROM paie WHERE id_agent = ? AND MONTH(date) = ? AND YEAR(date) = ? LIMIT 1`,
+  [agentId, mois, annee]
+  )
+  return rows.length > 0;
 };

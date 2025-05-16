@@ -21,7 +21,7 @@ exports.getAgentById = async (req, res) => {
   }
 };
 
-// agentControlleur.js
+// Controlleur pour récupérer du profil d'un agent spécifique
 exports.getAgentProfil = async (req, res) => {
   try {
     const agentId = req.query.agentId;
@@ -30,5 +30,16 @@ exports.getAgentProfil = async (req, res) => {
   } catch (err) {
     console.error('Erreur dans getAgentProfil:', err);
     res.status(404).json({ message: err.message });
+  }
+};
+
+// Controlleur pour récupérer les donnees
+exports.checkFichePaie = async (req, res) => {
+  try {
+    const { agentId, mois, annee } = req.query;
+    const exists = await agentService.checkFichePaie(agentId, mois, annee);
+    res.json({ exists });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };

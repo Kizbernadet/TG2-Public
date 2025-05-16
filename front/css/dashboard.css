@@ -188,7 +188,7 @@ body{
 }
 
 .navbar li:hover{
-    background-color: #99b5cf;
+    background-color: var(--color-fourth); /*changement de couleur pour quelle soit coherente avec les autres*/
 }
 
 .navbar li a{

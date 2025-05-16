@@ -4,7 +4,7 @@ const btnPrev = document.querySelector("#before-btn");
 const btnNext = document.querySelector("#next-btn");
 
 // Liste des keys contenus dans la response de la requête fetch
-let colonnes = ["id", "nom", "prenom", "diplome", "salaire_base", "date_embauche"];
+let colonnes = ["matricule", "nom", "prenom", "diplome", "salaire_base", "date_embauche"];
 
 let currentPage = 1;
 const agentsPerPage = 10;
@@ -15,6 +15,14 @@ function clearTable() {
   while ((firstChild = table_body.firstChild)) {
     table_body.removeChild(firstChild);
   }
+}
+
+// Récupérer l'idenifiant via le matricule 
+function getAgentId(matricule){
+  const splitted = matricule.split('-');
+  console.log(splitted)
+  const id = parseInt(splitted[splitted.length - 1], 10);
+  return id;
 }
 
 // Ajoute de la nom de la categorie sur le titre de la page 
@@ -32,7 +40,7 @@ function loadAgents(agentList) {
     colonnes.forEach(key => {
       const td = document.createElement("td");
 
-      if (key === "id") {
+      if (key === "matricule") {
         td.classList.add("agentId");
         td.textContent = agent[key];
       } else {
@@ -86,14 +94,63 @@ function updateButtonState(totalPages) {
   btnNext.classList.toggle("disabled", currentPage === totalPages);
 }
 
-// ==== Récupérer l'idenfiant d'un agent ====
+// ==== Gestion des évenements ====
 document.addEventListener("click", (event) => {
+  // ==== Récupérer l'idenfiant d'un agent ====
   if (event.target.matches(".agentId")) {
     event.preventDefault();
     
-    const agentId = event.target.textContent;
+    const agentMatricule = event.target.textContent;
+    const agentId = getAgentId(agentMatricule)
+    console.log(agentId)
     localStorage.setItem("selectedAgentId", JSON.stringify({id: agentId}));
     window.location.href = "profile.html"; // ou la page souhaitée
+  }
+
+  // ==== Action du bouton Générer les fiches de paies par catégorie ====
+  if (event.target.matches("#generate")) {
+    const categoryData = JSON.parse(localStorage.getItem("selectedCategory"));
+    const categoryId = categoryData?.id;
+    const categoryName = categoryData?.name;
+
+    if (!categoryId) {
+      alert("Aucune catégorie sélectionnée.");
+      return;
+    }
+
+    const confirmed = confirm(`⚠️ Voulez-vous vraiment générer les fiches de paie pour la catégorie "${categoryName}" ?`);
+
+    if (!confirmed) return;
+
+    // Envoi de la requête POST au serveur
+    // try {
+    //   fetch(`http://localhost:3000/api/paie/generate/category/${categoryId}`, {
+    //     method: "POST",
+    //   })
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       throw new Error("Erreur lors de la génération des fiches.");
+    //     }
+    //     return response.json();
+    //   })
+    //   .then(data => {
+    //     if (data?.fiches?.length > 0) {
+    //       alert(`✅ ${data.fiches.length} fiches générées avec succès !\nExemple :\n- Agent ${data.fiches[0].agent_id}, mois ${data.fiches[0].mois}, salaire ${data.fiches[0].salaire_total}€`);
+    //     } else {
+    //       alert("⚠️ Aucun agent trouvé pour cette catégorie ou aucun chiffre d'affaires disponible.");
+    //     }
+
+    //     console.log("Fiches générées :", data.fiches);
+    //   })
+
+    //   .catch(error => {
+    //     console.error("Erreur serveur :", error);
+    //     alert("❌ Une erreur est survenue lors de la génération.");
+    //   });
+    // } catch (error) {
+    //   console.error("Erreur JS :", error);
+    //   alert("❌ Erreur interne.");
+    // }
   }
 });
 

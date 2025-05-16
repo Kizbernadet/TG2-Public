@@ -1,4 +1,4 @@
-const db = require('../models/db.js');
+const db = require('../models/database.js');
 
 exports.generateByCategory = async (categoryId) => {
 
@@ -54,19 +54,19 @@ exports.generateByCategory = async (categoryId) => {
 };
 
 
-exports.generateIndividual = async (agentId) => {
-  // Même logique mais pour un seul agent
-};
+// exports.generateIndividual = async (agentId) => {
+//   // Même logique mais pour un seul agent
+// };
 
-exports.getByAgent = async (agentId) => {
-  const result = await db.query('SELECT * FROM paies WHERE id_agent = $1', [agentId]);
-  return result.rows;
-};
+// exports.getByAgent = async (agentId) => {
+//   const result = await db.query('SELECT * FROM paies WHERE id_agent = $1', [agentId]);
+//   return result.rows;
+// };
 
-exports.getByCriteria = async (mois, categorieId) => {
-  const result = await db.query(
-    `SELECT p.* FROM paies p JOIN agents a ON p.id_agent = a.id WHERE mois = $1 AND a.id_categorie = $2`,
-    [mois, categorieId]
-  );
-  return result.rows;
-};
+// exports.getByCriteria = async (mois, categorieId) => {
+//   const result = await db.query(
+//     `SELECT p.* FROM paies p JOIN agents a ON p.id_agent = a.id WHERE mois = $1 AND a.id_categorie = $2`,
+//     [mois, categorieId]
+//   );
+//   return result.rows;
+// };

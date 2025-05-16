@@ -219,7 +219,7 @@ main{
 }
 
 .agentProfil{
-    height: 95%;
+    height: 98%;
     flex-grow: 1;
     padding: var(--spacing-md);
     background-color: var(--color-light);

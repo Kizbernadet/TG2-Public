@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const agentController = require('../controllers/agents.controller.js');
+const agentController = require('../controllers/agentController.js');
 
 // Route pour obtenir tous les agents
 router.get('/', agentController.getAllAgents);

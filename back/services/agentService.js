@@ -1,6 +1,6 @@
 // services/agents.service.js
 
-const db = require('../models/db.js');
+const db = require('../models/database.js');
 
 // Affichage de tous les agents
 exports.fetchAllAgents = async () => {
@@ -14,7 +14,8 @@ exports.getByCategory = async (categoryId) => {
   const result = await db.query(
     ` 
       SELECT
-      id, nom, prenom, 
+      id, nom, 
+      prenom, matricule, 
       diplome, TO_CHAR(date_recrutement, 'DD/MM/YYYY') AS date_embauche , 
       salaire_base
       FROM agents WHERE id_categorie = $1
@@ -38,7 +39,7 @@ exports.getAgentProfile = async(agentId) => {
   const result = await db.query(
     `
     SELECT
-    agents.id, agents.nom, agents.prenom, 
+    agents.id, matricule, agents.nom, agents.prenom, 
     TO_CHAR(agents.date_recrutement, 'DD/MM/YYYY') AS date_recrutement, 
     agents.salaire_base, agents.statut, 
     cat.nom as categorie, cat.bonus_pourcentage as bonus, 

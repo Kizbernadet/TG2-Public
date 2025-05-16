@@ -10,7 +10,8 @@ const icons = {
     statut: "fa-circle", 
     categorie: "fa-briefcase", 
     bonus: "fa-gift", 
-    seuil: "fa-chart-line"
+    seuil: "fa-chart-line",
+    matricule : "fa-barcode"
 }
 
 

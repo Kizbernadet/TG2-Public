@@ -1,7 +1,7 @@
-const db = require('../models/db.js'); // Connexion à la base PostgreSQL
+const db = require('../models/database.js'); // Connexion à la base PostgreSQL
 
 // Fonction : récupérer toutes les catégories 
-const categorieService = require('../services/categorie.service.js');
+const categorieService = require('../services/categorieService.js');
 
 exports.getAllCategories = async (req, res) => {
     try{

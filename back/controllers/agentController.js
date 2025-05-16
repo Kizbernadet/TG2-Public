@@ -1,6 +1,6 @@
 // controllers/agents.controller.js
 
-const agentService = require('../services/agents.service.js');
+const agentService = require('../services/agentService.js');
 
 // Contrôleur : récupère les agents depuis le service
 exports.getAllAgents = async (req, res) => {

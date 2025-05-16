@@ -18,22 +18,19 @@ app.use(express.json());    // Pour parser le JSON des requêtes
 const db = require('./models/db');  // <-- à créer si non existant
 
 // 6. Routes
-const agentRoutes = require('./routes/agents.routes');
-const categorieRoutes = require('./routes/categorie.routes');
-const PaieController = require('./controllers/paie.controller');
+const agentRoutes = require('./routes/agentRoutes.js');
+const categorieRoutes = require('./routes/categorieRoutes.js');
+const paieRoutes = require("./routes/paieRoutes.js");
 
 // Routes agents
 app.use('/api/agents', agentRoutes);
-// app.use('api/agents/:categoryId', agentsRoutes.)
 
 // Routes catégories
 app.use('/api/categories', categorieRoutes);
 
-// Routes paie
-app.post('/api/generate/category/:categoryId', PaieController.generatePaieByCategory);
-app.post('/api/generate/agent/:agentId', PaieController.generateIndividualPaie);
-app.get('/api/agent/:agentId', PaieController.getPaiesByAgent);
-app.get('/api/filter', PaieController.getPaiesByCriteria);
+// Routes Paies
+// app.use('/api/paie', paieRoutes);
+
 
 // 7. Route de test
 app.get('/', (req, res) => {

@@ -296,7 +296,7 @@ main{
 }
 
 .categorie-card .view-button:hover{
-    background-color: var(--color-success);
+    background-color: var(--color-fourth);
 }
 
 /* .view-button a{
@@ -358,7 +358,7 @@ tbody .table-row{
 }
 
 td.agentId{
-    width: 5%;
+    width: 10%;
 }
 
 td.agentId:hover{
@@ -419,7 +419,7 @@ td.agentId:hover{
     justify-content: flex-end;
     align-items: center;
     gap: var(--spacing-sm);
-} 
+}
 
 .pagination-button button{
     font-family: var(--font-secondary);

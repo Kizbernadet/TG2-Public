@@ -1,4 +1,4 @@
-const PaieService = require('../services/paie.service.js');
+const PaieService = require('../services/paieService.js');
 
 // Générer les fiches de paie par catégorie
 exports.generatePaieByCategory = async (req, res) => {

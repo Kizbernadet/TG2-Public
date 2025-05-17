@@ -1,10 +1,21 @@
 {
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "moment": "^2.30.1",
+    "mysql2": "^3.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
   "name": "tg2-public",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "dbConnect.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server.js", 
+    "dev": "nodemon backend/server.js" 
   },
   "repository": {
     "type": "git",
@@ -18,6 +29,7 @@
     "url": "https://github.com/Kizbernadet/TG2-Public/issues"
   },
   "homepage": "https://github.com/Kizbernadet/TG2-Public#readme",
+  "description": ""
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",

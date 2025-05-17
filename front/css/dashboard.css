@@ -188,7 +188,7 @@ body{
 }
 
 .navbar li:hover{
-    background-color: var(--color-success);
+    background-color: var(--color-fourth); /*changement de couleur pour quelle soit coherente avec les autres*/
 }
 
 .navbar li a{
@@ -292,13 +292,15 @@ main{
 }
 
 .categorie-card .view-button:hover{
-    background-color: var(--color-success);
+    background-color: var(--color-fourth);
+    
 }
 
 .view-button a{
     color: var(--color-light);
     text-transform: uppercase;
     font-size: var(--text-md);
+    
 }
 
 /* === Tableau Dynamique === */
@@ -324,12 +326,28 @@ main{
 
 .categorie-table{
     width: 100%;
+    background-color: #d9e2eb;
     flex-grow: 1;
     border-collapse: collapse;
     border: solid var(--color-black) 2px;
+    margin-bottom: 23%; /*pour la gestion des espace entre les td */
+    align-items: center;
+    
 }
 
+.categorie-table th, .categorie-table td {
+    border: 1px solid white;
+    padding: var(--spacing-sm);
+    text-align: center;
+    font-family: var(--font-secondary);
+}
   
+/* ajout de se style pour le survol de la sélection de la ligne */
+.categorie-table tr:hover {
+  background-color: rgb(174, 199, 236);
+  transition: background 0.2s;
+}
+
 .categorie-table th {
     background-color: #1B75C9;
     color: white;
@@ -395,16 +413,17 @@ td.agentId:hover{
     height: 100%;
     border-radius: var(--radius-sm);
     font-weight: var(--fw-medium);
-    color: var(--color-dark);
+    color: var(--color-light);
     text-transform: uppercase;
     border: none;
     cursor: pointer;
     transition: all ease-in-out 0.3s;
+    background-color: var(--color-muted);
+    
 }
 
 .actions-buttons button:hover{
     font-weight: var(--fw-semibold);
-    color: var(--color-light);
     background-color: var(--color-fourth);
 }
 
@@ -437,3 +456,4 @@ td.agentId:hover{
     width: max-content;
     padding: var(--spacing-xs) var(--spacing-sm);
 }
+

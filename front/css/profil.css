@@ -188,7 +188,7 @@ body{
 }
 
 .navbar li:hover{
-    background-color: var(--color-success);
+    background-color: var(--color-fourth);
 }
 
 .navbar li a{
@@ -207,7 +207,8 @@ main{
     padding: var(--spacing-xs) var(--spacing-md);
 }
 
-.profil-container{
+
+.profil-container, .fiche-message{
     width: 100%;
     height: 100%;
     display: flex;
@@ -277,4 +278,73 @@ main{
 
 .actions-buttons button:hover{
     background-color: #0b6dff;
+}
+
+/* formulaire au clic de générer une fiche de paie */
+
+#fiche-form {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  justify-content: center;
+  align-items: center;
+  background: rgba(30, 42, 56, 0.25); /* var(--color-primary) avec opacité */
+  z-index: 2000;
+}
+
+#fiche-form .popup-content {
+  background: var(--bg-card, #fff);
+  padding: 24px 32px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(162, 205, 253, 0.18);
+  min-width: 420px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-family: var(--font-secondary);
+}
+
+#fiche-form form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 14px;
+}
+
+#fiche-form label {
+  color: var(--color-primary, #1E2A38);
+  font-weight: 500;
+}
+
+#fiche-form select, #fiche-form button[type="submit"] {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border, #E5E7EB);
+  font-size: 1rem;
+  background: var(--color-light, #fff);
+  color: var(--color-primary, #1E2A38);
+}
+
+#fiche-form button[type="submit"] {
+  background: var(--color-secondary, #3b77d1);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#fiche-form button[type="submit"]:hover {   
+  background: var(--color-fourth);
+}
+
+#close-fiche-form {
+  position: absolute;
+  top: 8px; right: 12px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: black;
+  cursor: pointer;
+
 }

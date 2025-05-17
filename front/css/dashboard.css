@@ -330,7 +330,7 @@ main{
     flex-grow: 1;
     border-collapse: collapse;
     border: solid var(--color-black) 2px;
-    margin-bottom: 23%; /*pour la gestion des espace entre les td */
+    margin-bottom: 16px; /*pour la gestion des espace entre les td */
     align-items: center;
     
 }
@@ -341,7 +341,7 @@ main{
     text-align: center;
     font-family: var(--font-secondary);
 }
-  
+
 /* ajout de se style pour le survol de la sélection de la ligne */
 .categorie-table tr:hover {
   background-color: rgb(174, 199, 236);

@@ -282,62 +282,44 @@ main{
 
 /* formulaire au clic de générer une fiche de paie */
 
-#fiche-form {
-  display: none;
+/* #fiche-form {
+  display: none; / masqué par défaut /
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.35); / fond semi-transparent /
+  z-index: 1000;
   justify-content: center;
   align-items: center;
-  background: rgba(30, 42, 56, 0.25); /* var(--color-primary) avec opacité */
-  z-index: 2000;
 }
 
 #fiche-form .popup-content {
-  background: var(--bg-card, #fff);
-  padding: 24px 32px;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(162, 205, 253, 0.18);
-  min-width: 420px;
   position: relative;
-  display: flex;
-  align-items: center;
-  gap: 18px;
+  margin: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  padding: 32px 24px;
+  min-width: 280px;
+  max-width: 350px;
+  margin: auto;
   font-family: var(--font-secondary);
+  justify-content: center;
 }
 
-#fiche-form form {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 14px;
+#fiche-form form label {
+  font-weight: bold;
+  margin-bottom: 4px;
 }
 
-#fiche-form label {
-  color: var(--color-primary, #1E2A38);
-  font-weight: 500;
-}
-
-#fiche-form select, #fiche-form button[type="submit"] {
-  padding: 6px 14px;
+#fiche-form form select {
+  width: 100%;
+  padding: 6px 8px;
   border-radius: 6px;
-  border: 1px solid var(--color-border, #E5E7EB);
-  font-size: 1rem;
-  background: var(--color-light, #fff);
-  color: var(--color-primary, #1E2A38);
+  border: 1px solid #ccc;
+  margin-bottom: 8px;
 }
-
-#fiche-form button[type="submit"] {
-  background: var(--color-secondary, #3b77d1);
-  color: #fff;
-  border: none;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-#fiche-form button[type="submit"]:hover {   
-  background: var(--color-fourth);
-}
-
 #close-fiche-form {
   position: absolute;
   top: 8px; right: 12px;
@@ -346,5 +328,111 @@ main{
   font-size: 22px;
   color: black;
   cursor: pointer;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease-in-out;
+  justify-content: center;
+  align-items: center;
+}
 
+/* Pour le contenu de la modale (formulaire ET message) */
+.modal-content {
+  background-color: #ffffff;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.4s ease;
+  position: relative;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Animation pour l'apparition */
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Bouton de fermeture */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  color: #888;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+/* Formulaire et message dans la modale */
+.modal-content label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #34495e;
+}
+.modal-content select,
+.modal-content input[type="number"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #f9f9f9;
+}
+.modal-content button[type="submit"],
+.modal-content #fiche-action-btn,
+.modal-content #fiche-retour-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 20px;
+  background-color: var(--color-secondary);
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.modal-content #fiche-retour-btn {
+  background: #e74c3c;
+  margin-top: 10px;
+}
+.modal-content button[type="submit"]:hover,
+.modal-content #fiche-action-btn:hover {
+  background-color: var(--color-fourth);
+}
+#fiche-retour-btn:hover {
+  background: #a30404;
+}
+
+/* Message de résultat */
+#fiche-message {
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  text-align: center;
+}
+#fiche-message-text {
+  font-size: 18px;
+  color: #2c3e50;
+  margin-bottom: 10px;
 }

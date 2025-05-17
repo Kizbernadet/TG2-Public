@@ -1,6 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 const agentId = params.get('agentId');
 
+// Chargement du profil agent
 async function loadProfil() {
   if (!agentId) return;
   const response = await fetch(`http://localhost:3000/api/agents/profil?agentId=${agentId}`);
@@ -30,7 +31,7 @@ async function loadProfil() {
 window.onload = loadProfil;
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Remplir la liste des années
+  // Remplir la liste des années dynamiquement
   const anneeSelect = document.getElementById('annee');
   if (anneeSelect) {
     for (let y = 2020; y <= 2030; y++) {
@@ -41,34 +42,46 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Afficher le formulaire au centre au clic sur "Générer une fiche"
-  const btn = document.querySelector('.addPaySlip');
+  // Cacher la modale au chargement
   const ficheForm = document.getElementById('fiche-form');
-  if (btn && ficheForm) {
-    btn.addEventListener('click', () => {
+  if (ficheForm) ficheForm.style.display = 'none';
+
+  // Afficher la modale au clic sur "Générer une fiche"
+  const genererBtn = document.querySelector('.addPaySlip');
+  if (genererBtn && ficheForm) {
+    genererBtn.addEventListener('click', function() {
       ficheForm.style.display = 'flex';
-      // Affiche le formulaire de sélection et masque le message
+      // Réinitialise l'affichage du formulaire et masque le message
       const form = ficheForm.querySelector('form');
       const ficheMessage = document.getElementById('fiche-message');
       if (form) form.style.display = 'flex';
       if (ficheMessage) ficheMessage.style.display = 'none';
     });
-
-    // Fermer le formulaire si on clique en dehors ou sur un bouton "Fermer"
-    ficheForm.addEventListener('click', (e) => {
-      if (e.target === ficheForm) {
-        ficheForm.style.display = 'none';
-      }
-    });
-    // Optionnel : bouton fermer dans le formulaire
-    const closeBtn = document.getElementById('close-fiche-form');
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        ficheForm.style.display = 'none';
-      });
-    }
   }
 
+  // Fermer la modale au clic sur la croix
+  const closeBtn = document.getElementById('close-fiche-form');
+  if (closeBtn && ficheForm) {
+    closeBtn.addEventListener('click', function() {
+      ficheForm.style.display = 'none';
+      // Réinitialise le formulaire (remet les placeholders)
+    const form = ficheForm.querySelector('form');
+    if (form) form.reset();
+    });
+  }
+
+  // Fermer la modale si on clique en dehors du contenu
+  if (ficheForm) {
+    ficheForm.addEventListener('click', function(e) {
+      if (e.target === ficheForm) {
+        ficheForm.style.display = 'none';
+        const form = ficheForm.querySelector('form');
+      if (form) form.reset();
+      }
+    });
+  }
+
+  // Gestion du formulaire de fiche
   const form = ficheForm ? ficheForm.querySelector('form') : null;
   const ficheMessage = document.getElementById('fiche-message');
   const ficheMessageText = document.getElementById('fiche-message-text');
@@ -87,30 +100,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Masque le formulaire de sélection
       form.style.display = 'none';
-      // Affiche le "nouveau formulaire" avec message et bouton
-      ficheMessage.style.display = 'flex';
+      // Affiche le message et le bouton d'action
+      if (ficheMessage) ficheMessage.style.display = 'flex';
 
       if (data.exists) {
-        ficheMessageText.textContent = "La fiche existe déjà.";
-        ficheActionBtn.textContent = "Voir";
-        ficheActionBtn.onclick = function() {
-          window.location.href = `fiches.html?agentId=${agentId}&mois=${mois}&annee=${annee}`;
-        };
+        if (ficheMessageText) ficheMessageText.textContent = "La fiche existe déjà.";
+        if (ficheActionBtn) {
+          ficheActionBtn.textContent = "Voir";
+          ficheActionBtn.onclick = function() {
+            window.location.href = `fiches.html?agentId=${agentId}&mois=${mois}&annee=${annee}`;
+          };
+        }
       } else {
-        ficheMessageText.textContent = "La fiche n'existe pas.";
-        ficheActionBtn.textContent = "Créer une nouvelle fiche";
-        ficheActionBtn.onclick = function() {
-          window.location.href = `creer-fiche.html?agentId=${agentId}&mois=${mois}&annee=${annee}`;
-        };
+        if (ficheMessageText) ficheMessageText.textContent = "La fiche n'existe pas.";
+        if (ficheActionBtn) {
+          ficheActionBtn.textContent = "Créer une nouvelle fiche";
+          ficheActionBtn.onclick = function() {
+            window.location.href = `creer-fiche.html?agentId=${agentId}&mois=${mois}&annee=${annee}`;
+          };
+        }
       }
     });
   }
 
   // Gestion du bouton retour (dans le message)
-  if (ficheRetourBtn) {
+  if (ficheRetourBtn && ficheMessage && form) {
     ficheRetourBtn.onclick = function() {
       ficheMessage.style.display = 'none';
-      if (form) form.style.display = 'flex';
+      form.style.display = 'flex';
     };
   }
 });

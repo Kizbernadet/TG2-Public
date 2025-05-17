@@ -29,25 +29,19 @@
         <section class="profil-container">
             <div class="agentProfil">
                 <ul class="profile-info"></ul>
-
-                <ul class="profile-info">
-                    <li><i class="fa fa-user"></i><span>Nom :</span> Adama Traoré</li>
-                    <li><i class="fa fa-briefcase"></i><span>Catégorie :</span> Senior</li>
-                    <li><i class="fa fa-calendar-alt"></i><span>Date d'entrée :</span> 01/03/2022</li>
-                    <li><i class="fa fa-money-bill-wave"></i><span>Salaire de base :</span> 500 000 F</li>
-                    <li><i class="fa fa-chart-line"></i><span>Seuil de performance :</span> 1 000 000 F</li>
-                    <li><i class="fa fa-gift"></i><span>Bonus :</span> 10 %</li>
-                    <li><i class="fa fa-circle" style="color:green;"></i><span>Statut :</span> Actif</li>
-                  </ul>
-
-            <!-- Formulaire caché pour générer une fiche -->
-            <div id="fiche-form">
-            <div class="popup-content">
-                <button id="close-fiche-form" title="Fermer">&times;</button>
-                <form>
-                <label for="mois">Mois :</label>
-                <select id="mois" name="mois">
-                        <option value="1">Janvier</option>
+             </div>
+            <div class="actions-buttons">
+                <button class="addPaySlip"><i class="fa-solid fa-plus"></i> Générer une fiche</button>
+                <button class="viewPaySlip"><i class="fa-solid fa-eye"></i> Voir les fiches existantes</button>
+                <button class="deletePaySlip"><i class="fa-solid fa-trash"></i> Supprimer / Modifier une fiche</button>
+            </div>
+                <div id="fiche-form" class="modal">
+                <div class="modal-content">
+                    <button id="close-fiche-form" class="close" title="Fermer">&times;</button>
+                    <!-- Formulaire de sélection -->
+                    <form id="fiche-formulaire" style="display: flex; flex-direction: column; gap: 16px;">
+                    <label for="mois">Mois :</label>
+                    <select id="mois" name="mois" required>                        <option value="1">Janvier</option>
                         <option value="2">Février</option>
                         <option value="3">Mars</option>
                         <option value="4">Avril</option>
@@ -59,19 +53,24 @@
                         <option value="10">Octobre</option>
                         <option value="11">Novembre</option>
                         <option value="12">Décembre</option>
-                </select>
-                <label for="annee" >Année :</label>
-                <select id="annee" name="annee"></select>
-                <button type="submit">Valider</button>
-                </form>
+                    </select>
 
-                <div id="fiche-message">
+                    <label for="annee">Année :</label>
+                    <select id="annee" name="annee" required>
+                        <option value="" disabled selected>Choisissez l'année</option>
+                        <!-- Années ajoutées dynamiquement -->
+                    </select>
+
+                    <button type="submit" style="margin-top: 12px;">Valider</button>
+                    </form>
+                    <!-- Message de résultat -->
+                    <div id="fiche-message" style="display: none; flex-direction: column; gap: 16px;">
                     <span id="fiche-message-text"></span>
-                    <button id="fiche-action-btn" ></button>
+                    <button id="fiche-action-btn"></button>
                     <button id="fiche-retour-btn">Retour</button>
+                    </div>
                 </div>
-            </div>
-            </div>
+                </div>
         </section>
     </main>
     <script src="/front/js/index.js"></script>

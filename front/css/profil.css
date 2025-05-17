@@ -266,7 +266,7 @@ main{
     height: 10%;
     border: none;
     border-radius: var(--radius-md);
-    background-color: var(--color-secondary);
+    background-color: var(--color-muted);
     padding: var(--spacing-sm);
     box-shadow: var(--shadow-lg);
     color: var(--color-light);
@@ -277,7 +277,7 @@ main{
 }
 
 .actions-buttons button:hover{
-    background-color: #0b6dff;
+    background-color: var(--color-fourth);
 }
 
 /* formulaire au clic de générer une fiche de paie */
@@ -342,9 +342,23 @@ main{
 }
 
 /* Pour le contenu de la modale (formulaire ET message) */
+/* Fond de la modale */
+.modal {
+  display: none; /* Affiché en JS : display: flex */
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Contenu de la modale (formulaire/message) */
 .modal-content {
-  background-color: #ffffff;
-  margin: 5% auto;
+  background-color: #fff;
+  margin: auto;
   padding: 30px;
   border-radius: 12px;
   width: 90%;
@@ -366,7 +380,7 @@ main{
 }
 
 /* Bouton de fermeture */
-.close {
+.close, #close-fiche-form {
   position: absolute;
   top: 15px;
   right: 20px;
@@ -376,6 +390,9 @@ main{
   border: none;
   cursor: pointer;
   transition: color 0.2s ease;
+}
+.close:hover, #close-fiche-form:hover {
+  color: #e74c3c;
 }
 
 /* Formulaire et message dans la modale */
@@ -402,7 +419,7 @@ main{
   width: 100%;
   padding: 12px;
   margin-top: 20px;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary, #2ecc71);
   border: none;
   color: white;
   font-weight: bold;
@@ -417,7 +434,7 @@ main{
 }
 .modal-content button[type="submit"]:hover,
 .modal-content #fiche-action-btn:hover {
-  background-color: var(--color-fourth);
+  background-color: var(--color-fourth, #27ae60);
 }
 #fiche-retour-btn:hover {
   background: #a30404;

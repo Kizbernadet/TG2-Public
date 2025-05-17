@@ -29,7 +29,7 @@
     "url": "https://github.com/Kizbernadet/TG2-Public/issues"
   },
   "homepage": "https://github.com/Kizbernadet/TG2-Public#readme",
-  "description": ""
+  "description": "",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",

@@ -4,8 +4,8 @@ console.log('categorieId récupéré :', categorieId);
 
 let employes = [];
 let currentPage = 1;
-const agentsPerPage = 5; // À adapter selon ton besoin
-const colonnes = [ "nom", "prenom", "diplome", "salaire_base", "date_recrutement"]; // À adapter selon ta table
+const agentsPerPage = 10; // À adapter selon ton besoin
+const colonnes = [ "matricule", "nom", "prenom", "diplome", "salaire_base", "date_recrutement"]; // À adapter selon ta table
 
 // Récupère les agents de la catégorie depuis l'API
 async function fetchAgents() {
@@ -24,6 +24,14 @@ function clearTable() {
   if (tbody) tbody.innerHTML = "";
 }
 
+ function getAgentId(matricule){
+      const splitted = matricule.split('-');
+      console.log(splitted)
+      const id = parseInt(splitted[splitted.length - 1], 10);
+    return id;
+    // tr.setAttribute("data-id", agent.id);
+    }
+
 // Affiche les agents sur la page courante
 function loadAgents(pageAgents) {
   const tbody = document.querySelector("#agent-table tbody");
@@ -34,6 +42,10 @@ function loadAgents(pageAgents) {
     tr.setAttribute("data-id", agent.id);
 
     // Respecte l'ordre des colonnes du tableau HTML
+    const tdMatricule = document.createElement("td");
+    tdMatricule.textContent = agent.matricule || "";
+    tr.appendChild(tdMatricule);
+
     const tdNom = document.createElement("td");
     tdNom.textContent = agent.nom || "";
     tr.appendChild(tdNom);

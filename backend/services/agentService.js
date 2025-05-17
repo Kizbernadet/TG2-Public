@@ -2,7 +2,7 @@ const db = require('../models/db.js'); // Connexion MySQL
 
 // Récupérer tous les agents d'une catégorie (ou tous si pas de filtre)
 exports.getAllAgents = async (categorieId) => {
-    let query = 'SELECT id, nom, prenom, diplome, salaire_base, date_recrutement FROM agent';
+    let query = 'SELECT matricule, id, nom, prenom, diplome, salaire_base, date_recrutement FROM agent';
     let params = [];
     if (categorieId) {
         query += ' WHERE id_categorie = ?';
@@ -25,7 +25,7 @@ exports.getAgentById = async (agentId) => {
 // Récupérer les donnees d'un agent spécifier par ID
 exports.getAgentProfil = async (agentId) => {
   const [rows] = await db.query(
-    `SELECT a.id, a.nom, a.prenom, a.date_recrutement, a.salaire_base, c.nom AS categorie, s.montant, 
+    `SELECT a.matricule, a.nom, a.prenom, a.date_recrutement, a.salaire_base, c.nom AS categorie, s.montant, 
             ROUND((c.bonus_pourcentage * 100), 0) as bonus_pourcentage, a.statut
      FROM agent as a
      JOIN categorie as c ON a.id_categorie = c.id

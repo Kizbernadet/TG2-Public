@@ -29,21 +29,19 @@
         <section class="profil-container">
             <div class="agentProfil">
                 <ul class="profile-info"></ul>
-            </div>
+             </div>
             <div class="actions-buttons">
                 <button class="addPaySlip"><i class="fa-solid fa-plus"></i> Générer une fiche</button>
                 <button class="viewPaySlip"><i class="fa-solid fa-eye"></i> Voir les fiches existantes</button>
                 <button class="deletePaySlip"><i class="fa-solid fa-trash"></i> Supprimer / Modifier une fiche</button>
             </div>
-            <div id="fiche-form" class="modal">
+                <div id="fiche-form" class="modal">
                 <div class="modal-content">
                     <button id="close-fiche-form" class="close" title="Fermer">&times;</button>
                     <!-- Formulaire de sélection -->
                     <form id="fiche-formulaire" style="display: flex; flex-direction: column; gap: 16px;">
                     <label for="mois">Mois :</label>
-                    <select id="mois" name="mois" required>
-                        <option value="" disabled selected>Choisissez le mois</option>
-                        <option value="1">Janvier</option>
+                    <select id="mois" name="mois" required>                        <option value="1">Janvier</option>
                         <option value="2">Février</option>
                         <option value="3">Mars</option>
                         <option value="4">Avril</option>

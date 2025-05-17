@@ -21,7 +21,7 @@ li{
 
 a{
     font-family: var(--font-secondary);
-    color: var(--color-black);
+    color: var(--color-dark);
     text-transform: none;
     text-decoration: none;
 }
@@ -358,7 +358,6 @@ main{
 }
 
 tbody .table-row{
-    min-height: 10px;
     background-color: var(--color-five);
     border-bottom: solid transparent 2px;
     padding: none;
@@ -366,12 +365,25 @@ tbody .table-row{
 }
 
 .table-row td {
-    width: 20px;
-    min-height: 10px;
     overflow: hidden;
     vertical-align: middle; /* ou top/bottom selon ce que tu veux */
     white-space: nowrap; /* évite les retours à la ligne */
+    border-right: solid 2px transparent;
 }
+
+td.agentId{
+    width: 5%;
+}
+
+td.agentId:hover{
+    font-weight: var(--fw-semibold);
+    color: var(--color-light);
+    background-color: var(--color-fourth);
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+}
+
+
   
   
 /* button {

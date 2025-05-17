@@ -207,6 +207,7 @@ main{
     padding: var(--spacing-xs) var(--spacing-md);
 }
 
+
 .profil-container, .fiche-message{
     width: 100%;
     height: 100%;
@@ -327,10 +328,7 @@ main{
   font-size: 22px;
   color: black;
   cursor: pointer;
-} */
-
-/* Style de la modale */
-/* Pour le fond de la modale */
+}
 .modal {
   display: none;
   position: fixed;

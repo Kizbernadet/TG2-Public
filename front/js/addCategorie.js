@@ -37,7 +37,7 @@ async function loadCategorie() {
         button.classList.add("view-button")
 
         const link = document.createElement("a");
-        link.setAttribute('href', `categorie_table.html?categorieId=${categorie.id}`);
+       link.setAttribute('href', `categorie_table.html?categorieId=${categorie.id}&categorieNom=${encodeURIComponent(categorie.nom)}`);
         link.textContent = "Voir les agents";
         button.appendChild(link);
 

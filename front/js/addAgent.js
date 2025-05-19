@@ -1,18 +1,29 @@
 const params = new URLSearchParams(window.location.search);
 const categorieId = params.get('categorieId');
+const categorieNom = params.get('categorieNom'); // Ajout pour le nom
+
 console.log('categorieId récupéré :', categorieId);
+console.log('categorieNom récupéré :', categorieNom);
+
+// Affichage dynamique du nom de la catégorie
+if (categorieNom) {
+  const catNameDiv = document.getElementById('categorie-name');
+  if (catNameDiv) {
+    catNameDiv.textContent = `Affichage des agents de la catégorie : ${categorieNom}`;
+  }
+}
 
 let employes = [];
 let currentPage = 1;
-const agentsPerPage = 10; // À adapter selon ton besoin
-const colonnes = [ "matricule", "nom", "prenom", "diplome", "salaire_base", "date_recrutement"]; // À adapter selon ta table
+const agentsPerPage = 10;
+const colonnes = [ "matricule", "nom", "prenom", "diplome", "salaire_base", "date_recrutement"];
 
 // Récupère les agents de la catégorie depuis l'API
 async function fetchAgents() {
   if (!categorieId) {
-  alert("Aucune catégorie sélectionnée !");
-  return;
-}
+    alert("Aucune catégorie sélectionnée !");
+    return;
+  }
   const response = await fetch(`http://localhost:3000/api/agents?categorieId=${categorieId}`);
   employes = await response.json();
   console.log("Agents récupérés :", employes);
@@ -24,13 +35,11 @@ function clearTable() {
   if (tbody) tbody.innerHTML = "";
 }
 
- function getAgentId(matricule){
-      const splitted = matricule.split('-');
-      console.log(splitted)
-      const id = parseInt(splitted[splitted.length - 1], 10);
-    return id;
-    // tr.setAttribute("data-id", agent.id);
-    }
+function getAgentId(matricule) {
+  const splitted = matricule.split('-');
+  const id = parseInt(splitted[splitted.length - 1], 10);
+  return id;
+}
 
 // Affiche les agents sur la page courante
 function loadAgents(pageAgents) {
@@ -64,7 +73,6 @@ function loadAgents(pageAgents) {
 
     const tdDate = document.createElement("td");
     if (agent.date_recrutement) {
-      // Formatage simple (YYYY-MM-DD)
       const date = new Date(agent.date_recrutement);
       tdDate.textContent = date.toLocaleDateString('fr-FR');
     } else {
@@ -92,7 +100,6 @@ function loadPage(pageNumber) {
 
   clearTable();
   loadAgents(pageAgents);
-
 
   // Met à jour l'affichage de la pagination (optionnel)
   // document.getElementById("page-info").textContent = `Page ${currentPage} / ${totalPages || 1}`;

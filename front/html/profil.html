@@ -41,7 +41,9 @@
                     <!-- Formulaire de sélection -->
                     <form id="fiche-formulaire" style="display: flex; flex-direction: column; gap: 16px;">
                     <label for="mois">Mois :</label>
-                    <select id="mois" name="mois" required>                        <option value="1">Janvier</option>
+                    <select id="mois" name="mois" required> 
+                        <option value="" disabled selected>Choisissez l'année</option>
+                        <option value="1">Janvier</option>
                         <option value="2">Février</option>
                         <option value="3">Mars</option>
                         <option value="4">Avril</option>

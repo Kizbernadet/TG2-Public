@@ -1,4 +1,4 @@
-const db = require('../models/database.js');
+const db = require('../models/db.js');
 
 // Récupère toutes les catégories avec leur bonus, seuils, et nombre d'agents
 exports.getAll = async () => {

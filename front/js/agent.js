@@ -2,12 +2,91 @@
 const table_body = document.querySelector("#agentTable tbody");
 const btnPrev = document.querySelector("#before-btn");
 const btnNext = document.querySelector("#next-btn");
+const generateButton = document.querySelector("#generate");
+const closeButton = document.querySelector("#closePopover");
+const confirmButton = document.querySelector("#confirmPopover");
+const generateRoute = `http://localhost:3000/api/paie/generate/category`;
+
+// fetch('/api/paie/generate/category', {
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({
+//     categoryId: 3,
+//     month: 5,
+//     year: 2025
+//   })
+// })
+//   .then(res => res.json())
+//   .then(data => console.log(data))
+//   .catch(err => console.error(err));
+
 
 // Liste des keys contenus dans la response de la requête fetch
 let colonnes = ["matricule", "nom", "prenom", "diplome", "salaire_base", "date_embauche"];
 
 let currentPage = 1;
 const agentsPerPage = 10;
+
+// Fonctions utilisées 
+generateButton.addEventListener("click", () => {
+    showPopover();
+})
+
+closeButton.addEventListener("click", () => {
+    hidePopover();
+})
+
+confirmButton.addEventListener("click", () => {
+    const month = document.querySelector("#paie_month").value;
+    const year = document.querySelector("#paie_year").value;
+    const categoryData = JSON.parse(localStorage.getItem("selectedCategory"));
+    const categoryId = categoryData?.id;
+    console.log(`Génération des fiches pour ${month}/${year}`);
+    console.log(categoryId);
+
+    console.log({
+          categorie : categoryId, 
+          paie_month : month, 
+          paie_year : year
+          
+        })
+
+    // Fermer la Popover
+    hidePopover();
+
+    // Envoi de la requête POST au serveur
+    try{
+      fetch(generateRoute, {
+        method: "POST", 
+        headers : {'Content-Type' : "Application/JSON"}, 
+        body : JSON.stringify({
+          categorie : categoryId, 
+          paie_month : month, 
+          paie_year : year
+          
+        })
+      })
+      .then(response => {
+        if(!response.ok){
+          throw new Error("Erreur lors de la generation des fiches.")
+        }
+        console.log(response);
+      })
+    }
+    catch(error){
+      console.error("Erreur JS : ", error);
+    }
+})
+
+function showPopover(){
+    const popover = document.querySelector('#dialog-popover');
+    popover.classList.add("show");
+}
+
+function hidePopover(){
+    const popover = document.querySelector('#dialog-popover');
+    popover.classList.remove("show");
+}
 
 // === 🧽 Nettoie le tableau HTML avant rechargement ===
 function clearTable() {
@@ -108,50 +187,22 @@ document.addEventListener("click", (event) => {
   }
 
   // ==== Action du bouton Générer les fiches de paies par catégorie ====
-  if (event.target.matches("#generate")) {
-    const categoryData = JSON.parse(localStorage.getItem("selectedCategory"));
-    const categoryId = categoryData?.id;
-    const categoryName = categoryData?.name;
+  // if (event.target.matches("#generate")) {
+  //   const categoryData = JSON.parse(localStorage.getItem("selectedCategory"));
+  //   const categoryId = categoryData?.id;
+  //   const categoryName = categoryData?.name;
 
-    if (!categoryId) {
-      alert("Aucune catégorie sélectionnée.");
-      return;
-    }
+  //   if (!categoryId) {
+  //     alert("Aucune catégorie sélectionnée.");
+  //     return;
+  //   }
 
-    const confirmed = confirm(`⚠️ Voulez-vous vraiment générer les fiches de paie pour la catégorie "${categoryName}" ?`);
+  //   const confirmed = confirm(`⚠️ Voulez-vous vraiment générer les fiches de paie pour la catégorie "${categoryName}" ?`);
 
-    if (!confirmed) return;
+  //   if (!confirmed) return;
 
-    // Envoi de la requête POST au serveur
-    // try {
-    //   fetch(`http://localhost:3000/api/paie/generate/category/${categoryId}`, {
-    //     method: "POST",
-    //   })
-    //   .then(response => {
-    //     if (!response.ok) {
-    //       throw new Error("Erreur lors de la génération des fiches.");
-    //     }
-    //     return response.json();
-    //   })
-    //   .then(data => {
-    //     if (data?.fiches?.length > 0) {
-    //       alert(`✅ ${data.fiches.length} fiches générées avec succès !\nExemple :\n- Agent ${data.fiches[0].agent_id}, mois ${data.fiches[0].mois}, salaire ${data.fiches[0].salaire_total}€`);
-    //     } else {
-    //       alert("⚠️ Aucun agent trouvé pour cette catégorie ou aucun chiffre d'affaires disponible.");
-    //     }
-
-    //     console.log("Fiches générées :", data.fiches);
-    //   })
-
-    //   .catch(error => {
-    //     console.error("Erreur serveur :", error);
-    //     alert("❌ Une erreur est survenue lors de la génération.");
-    //   });
-    // } catch (error) {
-    //   console.error("Erreur JS :", error);
-    //   alert("❌ Erreur interne.");
-    // }
-  }
+  //   // Envoi de la requête POST au serveur
+  
 });
 
 

@@ -1,6 +1,6 @@
 // services/agents.service.js
 
-const db = require('../models/database.js');
+const db = require('../models/db.js');
 
 // Affichage de tous les agents
 exports.fetchAllAgents = async () => {

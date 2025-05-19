@@ -1,45 +1,26 @@
-const PaieService = require('../services/paieService.js');
+const db = require('../models/db.js');
+const paieServices = require("../services/paieService.js");
 
-// Générer les fiches de paie par catégorie
-exports.generatePaieByCategory = async (req, res) => {
+// Générer les fiches de paies par catégorie
+exports.generateByCategory = async (req, res) => {
   try {
-    const { categoryId } = req.params;
-    const result = await PaieService.generateByCategory(categoryId);
-    res.status(201).json(result);
-  } catch (error) {
-    res.status(500).json({ message: "Erreur lors de la génération des fiches", error });
-  }
-};
+    const { categorie, paie_month, paie_year } = req.body;
 
-// Générer une fiche individuelle
-exports.generateIndividualPaie = async (req, res) => {
-  try {
-    const { agentId } = req.params;
-    const result = await PaieService.generateIndividual(agentId);
-    res.status(201).json(result);
-  } catch (error) {
-    res.status(500).json({ message: "Erreur de génération de fiche individuelle", error });
-  }
-};
+    // Appel au service
+    const result = await paieServices.generateByCategory(categorie, paie_month, paie_year);
 
-// Voir les fiches d’un agent
-exports.getPaiesByAgent = async (req, res) => {
-  try {
-    const { agentId } = req.params;
-    const result = await PaieService.getByAgent(agentId);
-    res.status(200).json(result);
-  } catch (error) {
-    res.status(500).json({ message: "Erreur de récupération des fiches", error });
-  }
-};
+    // Log de contrôle
+    console.log("Contrôleur - Demande reçue :", { categorie, paie_month, paie_year });
+    console.log("Contrôleur - Résultat :", result);
 
-// Voir la table selon les critères (mois, catégorie)
-exports.getPaiesByCriteria = async (req, res) => {
-  try {
-    const { mois, categorieId } = req.query;
-    const result = await PaieService.getByCriteria(mois, categorieId);
-    res.status(200).json(result);
+    // Réponse envoyée au front
+    res.status(200).json({
+      message: "Fiches générées avec succès",
+      data: result // { fichesCreees, fichesExistantes, fichesIgnorees }
+    });
+
   } catch (error) {
-    res.status(500).json({ message: "Erreur de récupération", error });
+    console.error("Erreur dans le contrôleur de paie :", error);
+    res.status(500).json({ error: "Erreur serveur lors de la génération des fiches" });
   }
 };

@@ -1,0 +1,25 @@
+/* ===== Style attribué aux composants ===== */
+.popover{
+    width: 40%;
+    height: 45%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: var(--radius-xs) solid var(--color-secondary);
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    background-color: var(--color-light);
+    font-family: var(--font-secondary);
+    gap: var(--spacing-sm);
+}
+
+.popover.show{
+    display: flex;
+    transition: all ease-in-out 0.3s;
+}

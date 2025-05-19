@@ -29,7 +29,7 @@ app.use('/api/agents', agentRoutes);
 app.use('/api/categories', categorieRoutes);
 
 // Routes Paies
-// app.use('/api/paie', paieRoutes);
+app.use('/api/paie', paieRoutes);
 
 
 // 7. Route de test

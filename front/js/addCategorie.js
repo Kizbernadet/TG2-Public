@@ -28,7 +28,8 @@ function loadCategorie(objects){
             const li = document.createElement('li');
             li.classList.add(`${key}`)
             if (key === "bonus") {
-                li.textContent = `${key} : ${values[value_index]} %`;
+                let value = parseFloat(values[value_index]) * 100;
+                li.textContent = `${key} : ${value} %`;
             }
             else if(key === "nombre_agents") {
                 li.textContent = `Agents : ${values[value_index]}`;

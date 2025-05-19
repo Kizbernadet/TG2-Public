@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemple Popover - Dialogue</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f1f1f1;
+    }
+
+    button {
+      padding: 10px 20px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    [popover] {
+      border: 1px solid #ccc;
+      padding: 20px;
+      background: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+    }
+
+    .popover-actions {
+      margin-top: 15px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bouton pour ouvrir la fenêtre de dialogue -->
+  <button popovertarget="dialog-popover">Ouvrir le dialogue</button>
+
+  <!-- Fenêtre de dialogue -->
+  <div id="dialog-popover" popover>
+    <h3>Confirmation</h3>
+    <p>Êtes-vous sûr de vouloir continuer ?</p>
+    <div class="popover-actions">
+      <button popovertarget="dialog-popover" popovertargetaction="hide">Annuler</button>
+      <button onclick="alert('Action confirmée!')">Confirmer</button>
+    </div>
+  </div>
+
+</body>
+</html>

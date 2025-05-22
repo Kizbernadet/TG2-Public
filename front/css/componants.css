@@ -19,7 +19,71 @@
     gap: var(--spacing-sm);
 }
 
+.popover.small{
+    width: 40%;
+    height: 30%;
+    border-color: var(--color-success);
+}
+
 .popover.show{
     display: flex;
     transition: all ease-in-out 0.3s;
+}
+
+#result-popover h3{
+    text-transform: uppercase;
+}
+
+#result-popover ul{
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#result-popover ul li{
+    text-align: center;
+}
+#result-popover .valideBtn{
+    width: 30%;
+    height: 20%;
+    background-color: var(--color-secondary);
+    color: var(--color-light);
+    transition: all  ease-in-out 0.3s;
+}
+
+#result-popover .valideBtn:hover{
+    transform: scale(1.1);
+    background-color: var(--color-success);
+}
+
+#login-popover h3{
+    font-weight: var(--fw-semibold);
+    font-size: var(--text-xl);
+}
+
+#login-popover i{
+    font-size: var(--text-2xl);
+    color: var(--color-success);
+}
+
+#login-popover #redirectionBtn{
+    
+    font-size: var(--text-sm);
+    color: var(--color-light);
+    text-decoration: none;
+    background-color: var(--color-secondary);
+    padding: var(--spacing-sm) var(--spacing-md);
+    text-transform: uppercase;
+    border-radius: var(--radius-md);
+    border: none;
+}
+
+#login-popover #redirectionBtn:hover{
+    font-weight: var(--fw-regular);
+    background-color: var(--color-fourth);
+    cursor: pointer;
+    transition: all ease-in-out 0.2s;
 }

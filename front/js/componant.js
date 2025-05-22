@@ -16,4 +16,3 @@ burger_button.addEventListener("click", () =>{
     navbar.classList.toggle("active")
 })
 
-//

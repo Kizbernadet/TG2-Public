@@ -20,16 +20,80 @@
 
         <nav class="navbar">
             <li><a href="categories.html">Catégorie des agents</a></li>
+            <li><a href="agents.html">Agents par catégorie</a></li>
             <li><a href="paies.html">Tables de paie</a></li>
-            <li><a href="#">items</a></li>
         </nav>
+        <div class="filter-button">
+          <button>Recherche Filtrée</button>
+        </div>
     </header>
     <main>
-        <section class="categorie-list">
-            <h1 class="title">
-                Tables des paiements
-            </h1>
+        <!-- <section id="searching-form">
+          <div id="dialog-popover show" class="popover">
+                    <h3 class="pop-title">Entrer les informations suivantes</h3>
+                    <div class="pop-content">
+                      <div class="pop-items">
+                        <label for="month">Mois</label>
+                        <select name="month" id="paie_month">
+                          <option value="1">Janvier</option>
+                          <option value="2">Fevrier</option>
+                          <option value="3">Mars</option>
+                          <option value="4">Avril</option>
+                          <option value="5">Mai</option>
+                          <option value="6">Juin</option>
+                          <option value="7">Juillet</option>
+                          <option value="8">Aout</option>
+                          <option value="9">Septembre</option>
+                          <option value="10">Octobre</option>
+                          <option value="11">Novembre</option>
+                          <option value="12">Decembre</option>
+                        </select>
+                      </div>
+                      <div class="pop-items">
+                        <label for="year">Année</label>
+                        <select name="year" id="paie_year">
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                          <option value="2024">2024</option>
+                          <option value="2025">2025</option>
+                          <option value="2026">2026</option>
+                          <option value="2027">2027</option>
+                          <option value="2028">2028</option>
+                          <option value="2029">2029</option>
+                          <option value="2030">2030</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="pop-actions">
+                      <button id="closePopover">Annuler</button>
+                      <button id="confirmPopover">Confirmer</button>
+                      <button id="changeCategoryPopover">Changer de catégorie</button>
+                    </div>
         </section>
+        <section class="table-container">
+            <table id="agentTable" class="categorie-table">
+                <thead>
+                  <tr>
+                    <th class="id">matricule</th>
+                    <th class="name">Nom</th>
+                    <th class="firstname">Prenom</th>
+                    <th class="total_salary">salaire</th>
+                    <th class="month">Mois</th>
+                    <th class="year">Année</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+              <div class="actions-buttons">
+                <div class="pagination-button">
+                  <button id="before-btn" class="before-btn">Precedent</button>
+                  <button id="next-btn" class="next-btn">Suivant</button>
+                </div>
+              </div>
+        </section> -->
     </main>
     <script src="/front/js/componant.js"></script>
 </body>

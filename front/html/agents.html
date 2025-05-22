@@ -21,8 +21,8 @@
         </div>
         <nav class="navbar">
             <li><a href="categories.html">Catégorie des agents</a></li>
+            <li><a href="agents.html">Agents par catégorie</a></li>
             <li><a href="paies.html">Tables de paie</a></li>
-            <li><a href="#">items</a></li>
         </nav>
     </header>
     <main>
@@ -45,6 +45,8 @@
               <div class="actions-buttons">
                 <div class="functions-buttons">
                   <button id="generate">Générer les fiches de paie</button>
+                  <div id="result-popover" class="popover">
+                  </div>
                   <div id="dialog-popover" class="popover">
                     <h3 class="pop-title">Entrer les informations suivantes</h3>
                     <div class="pop-content">
@@ -89,12 +91,12 @@
                   </div>
                   
                   <button class="export">Exporter</button>
+                  <button id="changeCategory">Changer de catégorie</button>
                 </div>
                 <div class="pagination-button">
                   <button id="before-btn" class="before-btn">Precedent</button>
                   <button id="next-btn" class="next-btn">Suivant</button>
                 </div>
-              </div>
               </div>
         </section>
     </main>

@@ -17,10 +17,24 @@ app.use(express.json());    // Pour parser le JSON des requêtes
 // 5. Importer la connexion à la base (MySQL ou PostgreSQL)
 const db = require('./models/db');  // <-- à créer si non existant
 
+
+// Création du compte admin par défaut 
+const createDefaultAdmin = require('./config/createAdmin')
+createDefaultAdmin()
+  .then(() => console.log('Compte admin par défaut créé'))
+  .catch(console.error);
+
+
+
+
 // 6. Routes
 const agentRoutes = require('./routes/agentRoutes.js');
 const categorieRoutes = require('./routes/categorieRoutes.js');
 const paieRoutes = require("./routes/paieRoutes.js");
+const loginRoutes = require("./routes/loginRoutes.js")
+
+// Routes login & Authentification
+app.use('/login', loginRoutes);
 
 // Routes agents
 app.use('/api/agents', agentRoutes);

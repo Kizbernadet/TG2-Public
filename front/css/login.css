@@ -1,5 +1,6 @@
 @import url(/front/css/variables.css);
 @import url(/front/css/style.css);
+@import url(/front/css/componants.css);
 
 body#login_body{
     display: flex;
@@ -95,4 +96,8 @@ form .form_items{
 .form_items button:hover{
     background-color: var(--color-secondary);
     transition: all ease-in-out 0.3s;
+}
+
+#loginBtn:disabled, #loginBtn:disabled:hover{
+    background-color: var(--color-muted);
 }

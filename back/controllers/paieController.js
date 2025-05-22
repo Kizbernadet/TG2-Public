@@ -24,3 +24,29 @@ exports.generateByCategory = async (req, res) => {
     res.status(500).json({ error: "Erreur serveur lors de la génération des fiches" });
   }
 };
+
+exports.generateForAgent = async (req, res) => {
+  try {
+    const { agentId, paie_month, paie_year } = req.body;
+
+    const result = await paieServices.generateForAgent(agentId, paie_month, paie_year);
+
+    res.status(200).json({
+      message: "Traitement terminé",
+      result
+    });
+
+  } catch (error) {
+    console.error("Erreur génération fiche individuelle :", error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+};
+
+exports.displayAll = async (req, res) => {
+  try{
+    const paieTable = await paieServices.getAll();
+    res.status(200).json({paieTable});
+  } catch(error){
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+}

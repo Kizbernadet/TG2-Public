@@ -1,4 +1,4 @@
-// === 🔧 Sélection des éléments DOM et variables ===
+// === 🔧 Sélection des éléments DOM ===
 const table_body = document.querySelector("#agentTable tbody");
 const btnPrev = document.querySelector("#before-btn");
 const btnNext = document.querySelector("#next-btn");
@@ -6,111 +6,87 @@ const generateButton = document.querySelector("#generate");
 const closeButton = document.querySelector("#closePopover");
 const confirmButton = document.querySelector("#confirmPopover");
 const generateRoute = `http://localhost:3000/api/paie/generate/category`;
+const functionsBtn = document.querySelector(".functions-buttons");
 
-// fetch('/api/paie/generate/category', {
-//   method: 'POST',
-//   headers: { 'Content-Type': 'application/json' },
-//   body: JSON.stringify({
-//     categoryId: 3,
-//     month: 5,
-//     year: 2025
-//   })
-// })
-//   .then(res => res.json())
-//   .then(data => console.log(data))
-//   .catch(err => console.error(err));
-
-
-// Liste des keys contenus dans la response de la requête fetch
 let colonnes = ["matricule", "nom", "prenom", "diplome", "salaire_base", "date_embauche"];
-
 let currentPage = 1;
 const agentsPerPage = 10;
 
-// Fonctions utilisées 
-generateButton.addEventListener("click", () => {
-    showPopover();
-})
-
-closeButton.addEventListener("click", () => {
-    hidePopover();
-})
-
-confirmButton.addEventListener("click", () => {
-    const month = document.querySelector("#paie_month").value;
-    const year = document.querySelector("#paie_year").value;
-    const categoryData = JSON.parse(localStorage.getItem("selectedCategory"));
-    const categoryId = categoryData?.id;
-    console.log(`Génération des fiches pour ${month}/${year}`);
-    console.log(categoryId);
-
-    console.log({
-          categorie : categoryId, 
-          paie_month : month, 
-          paie_year : year
-          
-        })
-
-    // Fermer la Popover
-    hidePopover();
-
-    // Envoi de la requête POST au serveur
-    try{
-      fetch(generateRoute, {
-        method: "POST", 
-        headers : {'Content-Type' : "Application/JSON"}, 
-        body : JSON.stringify({
-          categorie : categoryId, 
-          paie_month : month, 
-          paie_year : year
-          
-        })
-      })
-      .then(response => {
-        if(!response.ok){
-          throw new Error("Erreur lors de la generation des fiches.")
-        }
-        console.log(response);
-      })
-    }
-    catch(error){
-      console.error("Erreur JS : ", error);
-    }
-})
-
-function showPopover(){
-    const popover = document.querySelector('#dialog-popover');
-    popover.classList.add("show");
+// === 🧩 Fonctions utilitaires ===
+function getAgentId(matricule) {
+  const splitted = matricule.split("-");
+  return parseInt(splitted[splitted.length - 1], 10);
 }
 
-function hidePopover(){
-    const popover = document.querySelector('#dialog-popover');
-    popover.classList.remove("show");
-}
-
-// === 🧽 Nettoie le tableau HTML avant rechargement ===
 function clearTable() {
-  let firstChild;
-  while ((firstChild = table_body.firstChild)) {
-    table_body.removeChild(firstChild);
+  while (table_body.firstChild) {
+    table_body.removeChild(table_body.firstChild);
   }
 }
 
-// Récupérer l'idenifiant via le matricule 
-function getAgentId(matricule){
-  const splitted = matricule.split('-');
-  console.log(splitted)
-  const id = parseInt(splitted[splitted.length - 1], 10);
-  return id;
+function addCategoryName(categoryName) {
+  document.querySelector("#categoryName").textContent = categoryName;
 }
 
-// Ajoute de la nom de la categorie sur le titre de la page 
-function addCategoryName(categoryName){
-  const span = document.querySelector("#categoryName");
-  span.textContent = `${categoryName}`
+// === 🎛️ Fonctions liées au DOM ===
+function showPopover() {
+  document.querySelector("#dialog-popover").classList.add("show");
 }
 
-// === 📦 Remplit le tableau avec une liste d'agents ===
+function hidePopover() {
+  document.querySelector("#dialog-popover").classList.remove("show");
+}
+
+function showOrHidePop() {
+  document.querySelector("#result-popover").classList.toggle("show");
+}
+
+function displayValidPop(object, status) {
+  const popover = document.querySelector('#result-popover');
+
+  // Supprime le contenu précédent
+  while (popover.firstChild) {
+    popover.removeChild(popover.firstChild);
+  }
+
+  const title = document.createElement("h3");
+  const icon = document.createElement("span");
+  icon.style.marginRight = "8px";
+
+  if (status === "valid") {
+    icon.textContent = "✅";
+    title.textContent = "Operation Effectuée";
+    title.prepend(icon);
+    popover.appendChild(title);
+
+    const list = document.createElement("ul");
+    for (let item in object) {
+      const li = document.createElement("li");
+      li.textContent = `${item} : ${object[item]}`;
+      list.appendChild(li);
+    }
+    popover.appendChild(list);
+  } else {
+    icon.textContent = "❌";
+    title.textContent = "Operation Non Effectuée";
+    title.prepend(icon);
+    popover.appendChild(title);
+
+    const paragraph = document.createElement("p");
+    paragraph.textContent = "Impossible de joindre le serveur ou l'opération a échoué.";
+    popover.appendChild(paragraph);
+  }
+
+  const valideBtn = document.createElement("button");
+  valideBtn.classList.add("valideBtn");
+  valideBtn.textContent = "Fermer";
+  valideBtn.setAttribute("onclick", "showOrHidePop()");
+  popover.appendChild(valideBtn);
+}
+
+
+
+// === 📄 Chargement et affichage des agents ===
 function loadAgents(agentList) {
   agentList.forEach(agent => {
     const line = document.createElement("tr");
@@ -118,14 +94,8 @@ function loadAgents(agentList) {
 
     colonnes.forEach(key => {
       const td = document.createElement("td");
-
-      if (key === "matricule") {
-        td.classList.add("agentId");
-        td.textContent = agent[key];
-      } else {
-        td.textContent = agent[key];
-      }
-
+      td.textContent = agent[key];
+      if (key === "matricule") td.classList.add("agentId");
       line.appendChild(td);
     });
 
@@ -133,20 +103,15 @@ function loadAgents(agentList) {
   });
 }
 
-// === 📄 Charge une page spécifique d'agents ===
 function loadPage(pageNumber) {
   const totalPages = Math.ceil(employes.length / agentsPerPage);
   if (pageNumber < 1 || pageNumber > totalPages) return;
 
   currentPage = pageNumber;
-  const start = (currentPage - 1) * agentsPerPage;
-  const end = start + agentsPerPage;
-  const pageAgents = employes.slice(start, end);
-
+  const pageAgents = employes.slice((currentPage - 1) * agentsPerPage, currentPage * agentsPerPage);
   clearTable();
   loadAgents(pageAgents);
 
-  // Complète avec des lignes vides si besoin
   const missingRows = agentsPerPage - pageAgents.length;
   for (let i = 0; i < missingRows; i++) {
     const line = document.createElement("tr");
@@ -159,61 +124,87 @@ function loadPage(pageNumber) {
     });
 
     table_body.appendChild(line);
-  }  
+  }
 
   updateButtonState(totalPages);
 }
 
-// === 🔁 Active/désactive les boutons de pagination ===
 function updateButtonState(totalPages) {
   btnPrev.disabled = currentPage === 1;
   btnPrev.classList.toggle("disabled", currentPage === 1);
-
   btnNext.disabled = currentPage === totalPages;
   btnNext.classList.toggle("disabled", currentPage === totalPages);
 }
 
-// ==== Gestion des évenements ====
-document.addEventListener("click", (event) => {
-  // ==== Récupérer l'idenfiant d'un agent ====
-  if (event.target.matches(".agentId")) {
-    event.preventDefault();
-    
-    const agentMatricule = event.target.textContent;
-    const agentId = getAgentId(agentMatricule)
-    console.log(agentId)
-    localStorage.setItem("selectedAgentId", JSON.stringify({id: agentId}));
-    window.location.href = "profile.html"; // ou la page souhaitée
+// === 🌐 Génération de la paie ===
+async function generatePayroll() {
+  const month = document.querySelector("#paie_month").value;
+  const year = document.querySelector("#paie_year").value;
+  const categoryData = JSON.parse(localStorage.getItem("selectedCategory"));
+  const categoryId = categoryData?.id;
+
+  if (!categoryId || !month || !year) {
+    alert("Veuillez sélectionner une catégorie et renseigner le mois et l'année.");
+    return;
   }
 
-  // ==== Action du bouton Générer les fiches de paies par catégorie ====
-  // if (event.target.matches("#generate")) {
-  //   const categoryData = JSON.parse(localStorage.getItem("selectedCategory"));
-  //   const categoryId = categoryData?.id;
-  //   const categoryName = categoryData?.name;
+  // ⛔ Désactiver le bouton de confirmation et indiquer que c'est en cours
+  confirmButton.disabled = true;
+  const originalText = confirmButton.textContent;
+  confirmButton.textContent = "En cours...";
 
-  //   if (!categoryId) {
-  //     alert("Aucune catégorie sélectionnée.");
-  //     return;
-  //   }
+  try {
+    const response = await fetch(generateRoute, {
+      method: "POST",
+      headers: { 'Content-Type': "application/json" },
+      body: JSON.stringify({
+        categorie: categoryId,
+        paie_month: month,
+        paie_year: year 
+      })
+    });
 
-  //   const confirmed = confirm(`⚠️ Voulez-vous vraiment générer les fiches de paie pour la catégorie "${categoryName}" ?`);
+    if (!response.ok) {
+      throw new Error(`Erreur serveur : ${response.status} ${response.statusText}`);
+    }
 
-  //   if (!confirmed) return;
+    const data = await response.json();
 
-  //   // Envoi de la requête POST au serveur
-  
+    hidePopover(); // Ferme la pop-up de confirmation
+    displayValidPop(data.data, "valid"); // Affiche le pop-up de succès
+    showOrHidePop();
+  } catch (error) {
+    console.error("Erreur lors de la génération :", error);
+    hidePopover();
+    displayValidPop(null, "invalid");
+    showOrHidePop();
+  } finally {
+    // ✅ Réactivation du bouton avec son texte initial
+    confirmButton.disabled = false;
+    confirmButton.textContent = originalText;
+  }
+}
+
+
+
+// === 🚀 Initialisation et événements ===
+generateButton.addEventListener("click", showPopover);
+closeButton.addEventListener("click", hidePopover);
+confirmButton.addEventListener("click", generatePayroll);
+
+document.addEventListener("click", (event) => {
+  if (event.target.matches(".agentId")) {
+    event.preventDefault();
+    const agentId = getAgentId(event.target.textContent);
+    localStorage.setItem("selectedAgentId", JSON.stringify({ id: agentId }));
+    window.location.href = "profile.html";
+  }
 });
 
-
-// === 🌐 Récupère les agents de la catégorie sélectionnée ===
 document.addEventListener("DOMContentLoaded", async () => {
   const categoryData = JSON.parse(localStorage.getItem("selectedCategory"));
-  const categoryId = categoryData.id;
-  const categoyName = categoryData.name;
-
-
-  //localStorage.removeItem("selectedCategory")
+  const categoryId = categoryData?.id;
+  const categoryName = categoryData?.name;
 
   if (!categoryId) {
     console.error("Catégorie non sélectionnée.");
@@ -223,18 +214,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch(`http://localhost:3000/api/agents/by-category/${categoryId}`);
     const data = await response.json();
-
-    // On suppose que data.agents contient un objet → on convertit en tableau
     employes = Object.values(data.agents);
-
-    loadPage(currentPage); // Chargement de la première page
-    addCategoryName(categoyName);
+    loadPage(currentPage);
+    addCategoryName(categoryName);
   } catch (error) {
     console.error("Erreur lors de la récupération des agents :", error);
   }
 });
 
-// === 🚀 Initialisation des boutons au chargement ===
 window.onload = () => {
   btnPrev.addEventListener("click", () => loadPage(currentPage - 1));
   btnNext.addEventListener("click", () => loadPage(currentPage + 1));

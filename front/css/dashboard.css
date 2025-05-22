@@ -7,36 +7,8 @@
 
 @import url(/front/css/variables.css);
 @import url(/front/css/componants.css);
+@import url(/front/css/style.css);
   
-
-*{
-    margin: 0px;
-    outline: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
-li{
-    list-style: none;
-}
-
-a{
-    font-family: var(--font-secondary);
-    color: var(--color-dark);
-    text-transform: none;
-    text-decoration: none;
-}
-
-/* Stylsation de la scrollbar */
-::-webkit-scrollbar{
-    width: 5px;
-    background-color: lightblue;
-}
-
-::-webkit-scrollbar-thumb{
-    height: 4px;
-    background-color: tomato;
-}
 
 body{
     width: 100vw;
@@ -370,23 +342,6 @@ td.agentId:hover{
     transition: all ease-in-out 0.3s;
 }
 
-
-  
-  
-/* button {
-    padding: 6px 12px;
-    margin-right: 6px;
-    border: none;
-    background-color: #0984e3;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-}
-  
-  button:hover {
-    background-color: #74b9ff;
-  } */
-
 .actions-buttons{
     width: 100%;
     height: 7%;
@@ -414,6 +369,10 @@ td.agentId:hover{
 }
 
 /* ===== Popover Style ===== */
+#popoverResult.show{
+    display: flex;
+    background-color: red;
+}
 .popover .pop-title{
     width: 100%;
     height: 10%;
@@ -522,3 +481,30 @@ td.agentId:hover{
     }
     
 } */
+
+
+/* ============ Paies ============== */
+header .filter-button{
+    position: absolute;
+    top: var(--spacing-sm);
+    right: 50px;
+    width: 200px;
+    height: 40px;
+}
+
+.filter-button button{
+    /* display: none; */
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: var(--radius-lg);
+    background-color: var(--color-secondary);
+    font-family: var(--font-secondary);
+    font-size: var(--text-base);
+    padding: 0 var(--spacing-md);
+    text-transform: uppercase;
+    color: var(--color-light);
+    line-height: max-content;
+    cursor: pointer;
+}
+/* ============ Paies ============== */

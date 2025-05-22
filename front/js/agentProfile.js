@@ -41,7 +41,8 @@ function loadAgentData(data){
         }
 
         else if(key === "bonus"){
-            span.textContent = `${key} : ${data[key]} %`;
+            let value = parseFloat(data[key]) * 100;
+            span.textContent = `${key} : ${value} %`;
         }
 
         else if(key === "statut"){

@@ -3,32 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../css/style.css" />
   <link rel="stylesheet" href="../css/login.css">
 </head>
 <body id="login_body">
   <section id="login">
     <div class="logo">
-      <img src="/assets/logo/mypay logo II.png" alt="">
+      <img src="/assets/logo/mypay logo II.png" alt="Logo Mypay">
     </div>
     <div class="login_form">
-      <form action="get">
+      <!-- <div class="popover small show" id="login-popover">
+        <h3 class="title">Connexion Réussie</h3>
+        <i class="fa-solid fa-square-check"></i>
+        <button id="redirectionBtn">Aller vers la page des agents</button>
+      </div> -->
+      <form id="loginForm">
         <div class="form_items">
-          <label for="id">Identifiant</label>
-          <input type="text" name="id" id="id" placeholder="Entrer votre idenfitiant" required>
+          <label for="matricule">Identifiant</label>
+          <input type="text" name="matricule" id="matricule" placeholder="Entrer votre identifiant" required>
         </div>
-
         <div class="form_items">
           <label for="password">Mot de passe</label>
           <input type="password" name="password" id="password" placeholder="Entrer votre mot de passe" required>
         </div>
 
         <div class="form_items">
-          <button type="submit">Se connecter</button>
+          <button id="loginBtn" type="submit">Se connecter</button>
         </div>
-
       </form>
     </div>
   </section>
+
+  <!-- Script pour gérer la requête fetch -->
+  <script src="../js/login.js"></script>
 </body>
 </html>

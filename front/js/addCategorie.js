@@ -4,9 +4,6 @@ const api_url = "http://localhost:3000/api/categories";
 const button = document.querySelectorAll(".view-button");
 
 
-function sendCategoryId(){
-
-}
 function loadCategorie(objects){
     for (item in objects){
         const data = objects[item];

@@ -20,6 +20,36 @@ body{
     height: 100vh;
 }
 
+li{
+    list-style: none;
+}
+
+*{
+    margin: 0px;
+    outline: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+
+a{
+    font-family: var(--font-secondary);
+    color: var(--color-dark);
+    text-transform: none;
+    text-decoration: none;
+}
+
+/* Stylsation de la scrollbar */
+::-webkit-scrollbar{
+    width: 5px;
+    background-color: lightblue;
+}
+
+::-webkit-scrollbar-thumb{
+    height: 4px;
+    background-color: var(--color-primary);
+}
+
 
 
 /* === Media Queries === */

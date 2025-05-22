@@ -1,9 +1,7 @@
 // models/paieGenerator.js
 const db = require('../models/db.js');
 
-/**
- * Récupère les agents d'une catégorie donnée
- */
+// Récupère les agents d'une catégorie donnée
 async function getAgentsByCategory(categoryId) {
   const result = await db.query(
     `SELECT id FROM agents WHERE id_categorie = $1`,
@@ -12,43 +10,30 @@ async function getAgentsByCategory(categoryId) {
   return result.rows;
 }
 
-/**
- * Vérifie si une fiche existe déjà pour un agent à une date donnée
- */
+// Vérifie si une fiche existe déjà pour un agent à une date donnée
 async function ficheExists(agentId, month, year) {
   const result = await db.query(
-    `SELECT 1 FROM paies
-     WHERE id_agent = $1 AND mois_paye = $2 AND annee_paye = $3`,
+    `SELECT 1 FROM paies WHERE id_agent = $1 AND mois_paye = $2 AND annee_paye = $3`,
     [agentId, month, year]
   );
   return result.rows.length > 0;
 }
 
-/**
- * Récupère le chiffre d'affaire d'un agent pour une période donnée
- */
+// Récupère le chiffre d'affaires d'un agent pour une période donnée
 async function getTurnover(agentId, categoryId, month, year) {
   const result = await db.query(
     `SELECT ca.montant
      FROM chiffre_affaire ca
      JOIN agents ON agents.id = ca.id_agent
-     WHERE ca.id_agent = $1 AND agents.id_categorie = $2
+     WHERE ca.id_agent = $1 AND id_categorie = $2
        AND EXTRACT(MONTH FROM ca.date) = $3
        AND EXTRACT(YEAR FROM ca.date) = $4`,
     [agentId, categoryId, month, year]
   );
-  if (result.rows.length === 0) {
-    console.log(`Pas de chiffre d'affaire pour agent ${agentId}`);
-    return null;
-  }
-  const montant = parseFloat(result.rows[0].montant);
-  console.log("Chiffre d'affaire récupéré :", montant);
-  return montant;
+  return result.rows.length > 0 ? parseFloat(result.rows[0].montant) : null;
 }
 
-/**
- * Récupère les données d'un agent
- */
+// Récupère les données d'un agent
 async function getAgentData(agentId) {
   const result = await db.query(
     `SELECT matricule, salaire_base, id_categorie FROM agents WHERE id = $1`,
@@ -57,9 +42,7 @@ async function getAgentData(agentId) {
   return result.rows[0];
 }
 
-/**
- * Récupère les données de bonus d'une catégorie
- */
+// Récupère les données de bonus d'une catégorie
 async function getCategoryBonus(categoryId) {
   const result = await db.query(
     `SELECT bonus_pourcentage AS bonus, montant
@@ -72,21 +55,16 @@ async function getCategoryBonus(categoryId) {
   return result.rows[0];
 }
 
-/**
- * Insère une fiche de paie dans la base de données
- */
+// Insère une fiche de paie dans la base de données
 async function insertPaySlip(agentId, matricule, salaireBase, bonus, total, createdDate, mois, annee) {
   await db.query(
     `INSERT INTO paies (date, matricule, salaire_base, bonus, salaire_total, id_agent, mois_paye, annee_paye)
      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
     [createdDate, matricule, salaireBase, bonus, total, agentId, mois, annee]
   );
-  console.log("Fiche ajoutée pour agent", agentId);
 }
 
-/**
- * Récupère la fiche de paie nouvellement créée pour un agent donné
- */
+// Récupère la fiche de paie nouvellement créée pour un agent donné
 async function getNewPaySlip(agentId, month, year) {
   const result = await db.query(
     `SELECT p.*, a.nom, a.prenom, c.nom AS categorie, s.montant AS seuil, c.bonus_pourcentage AS pourcentage
@@ -95,23 +73,15 @@ async function getNewPaySlip(agentId, month, year) {
      JOIN categories c ON a.id_categorie = c.id
      JOIN avoir ON c.id = avoir.id_categorie
      JOIN seuils s ON avoir.id_seuil = s.id
-     WHERE p.id_agent = $1
-       AND p.mois_paye = $2
-       AND p.annee_paye = $3
+     WHERE p.id_agent = $1 AND p.mois_paye = $2 AND p.annee_paye = $3
      ORDER BY p.date DESC
      LIMIT 1`,
     [agentId, month, year]
   );
 
-  if (result.rows.length === 0) {
-    console.log("Aucune fiche trouvée");
-    return null;
-  }
+  if (result.rows.length === 0) return null;
 
   const fiche = result.rows[0];
-  const chiffreAffaire = fiche.salaire_total - fiche.salaire_base - fiche.bonus < 0
-    ? null
-    : fiche.salaire_total - fiche.salaire_base - fiche.bonus + parseFloat(fiche.bonus);
 
   return {
     matricule: fiche.matricule,
@@ -121,7 +91,7 @@ async function getNewPaySlip(agentId, month, year) {
     seuil: parseFloat(fiche.seuil),
     pourcentage: parseFloat(fiche.pourcentage),
     salaire_base: parseFloat(fiche.salaire_base),
-    chiffre_affaire: chiffreAffaire,
+    chiffre_affaire: fiche.salaire_total - fiche.salaire_base - fiche.bonus < 0 ? null : fiche.salaire_total - fiche.salaire_base - fiche.bonus + parseFloat(fiche.bonus),
     bonus: parseFloat(fiche.bonus),
     salaire_total: parseFloat(fiche.salaire_total),
     mois_paye: fiche.mois_paye,
@@ -130,33 +100,17 @@ async function getNewPaySlip(agentId, month, year) {
   };
 }
 
-/**
- * Génère les fiches pour une catégorie, un mois et une année donnés
- */
+// Génère les fiches pour une catégorie, un mois et une année donnés
 exports.generateByCategory = async (categoryId, month, year) => {
   const agents = await getAgentsByCategory(categoryId);
 
-  let fichesCreees = 0;
-  let fichesExistantes = 0;
-  let fichesIgnorees = 0;
-
   for (const agent of agents) {
-    const alreadyExists = await ficheExists(agent.id, month, year);
-
-    if (alreadyExists) {
-      fichesExistantes++;
-      continue;
-    }
+    if (await ficheExists(agent.id, month, year)) continue;
 
     const turnover = await getTurnover(agent.id, categoryId, month, year);
-
-    if (turnover === null) {
-      fichesIgnorees++;
-      continue;
-    }
+    if (turnover === null) continue;
 
     const agentData = await getAgentData(agent.id);
-    const matricule = agentData.matricule;
     const categoryData = await getCategoryBonus(categoryId);
 
     const salaireBase = parseFloat(agentData.salaire_base);
@@ -164,27 +118,18 @@ exports.generateByCategory = async (categoryId, month, year) => {
     const pourcentage = parseFloat(categoryData.bonus);
 
     const difference = turnover - seuil;
+    if (difference <= 0) continue;
 
-    if (difference > 0) {
-      const bonus = difference * pourcentage;
-      const salaireTotal = bonus + salaireBase;
-      const createdDate = new Date();
+    const bonus = difference * pourcentage;
+    const salaireTotal = bonus + salaireBase;
+    const createdDate = new Date();
 
-      await insertPaySlip(agent.id, matricule, salaireBase, bonus, salaireTotal, createdDate, month, year);
-      const ficheCreee = await getNewPaySlip(agent.id, month, year);
-      console.log("Fiche générée :", ficheCreee);
-      fichesCreees++;
-    } else {
-      fichesIgnorees++;
-    }
+    await insertPaySlip(agent.id, agentData.matricule, salaireBase, bonus, salaireTotal, createdDate, month, year);
+    await getNewPaySlip(agent.id, month, year); // Optionnel : affichage / log
   }
-
-  console.log({ fichesCreees, fichesExistantes, fichesIgnorees });
 };
 
-/**
- * Générer une fiche de paie individuelle
- */
+// Génère une fiche individuelle ou retourne celle existante
 exports.generateForAgent = async (agentId, mois, annee) => {
   const agentData = await getAgentData(agentId);
   if (!agentData) throw new Error("Agent introuvable");
@@ -192,14 +137,15 @@ exports.generateForAgent = async (agentId, mois, annee) => {
   const { matricule, salaire_base, id_categorie } = agentData;
   const salaireBase = parseFloat(salaire_base);
 
-  const ficheExistante = await ficheExists(agentId, mois, annee);
-
-  if (ficheExistante) {
+  const existing = await ficheExists(agentId, mois, annee);
+  if (existing) {
     return await getNewPaySlip(agentId, mois, annee);
   }
 
   const chiffreAffaire = await getTurnover(agentId, id_categorie, mois, annee);
-  if (chiffreAffaire === null) throw new Error("Pas de chiffre d'affaire disponible");
+  if (chiffreAffaire === null) {
+    throw new Error("Pas de chiffre d'affaire disponible pour cette période");
+  }
 
   const categoryData = await getCategoryBonus(id_categorie);
   const seuil = parseFloat(categoryData.montant);
@@ -214,69 +160,64 @@ exports.generateForAgent = async (agentId, mois, annee) => {
   return await getNewPaySlip(agentId, mois, annee);
 };
 
-/**
- * Récupère toute la table paie
- */
+// Récupère toute la table paie
 exports.getAll = async () => {
   const result = await db.query(`
-    SELECT p.matricule, a.nom, a.prenom, p.salaire_total as salaire,
-           p.mois_paye as mois, p.annee_paye as annee
+    SELECT p.matricule, a.nom, a.prenom, p.salaire_total as salaire, p.mois_paye as mois, p.annee_paye as annee
     FROM paies p
     JOIN agents a ON a.id = p.id_agent
     ORDER BY p.date DESC
   `);
 
-  const rows = result.rows;
   const AllpaySlip = {};
-  rows.forEach(item => {
+  result.rows.forEach(item => {
     AllpaySlip[item.nom] = item;
   });
 
   return AllpaySlip;
 };
 
-/**
- * Récupère les fiches selon filtre
- */
+// Filtrage des fiches de paie
 exports.getPaySlipByFilter = async (matricule, categorieId, mois, annee) => {
-  const conditions = [];
-  const params = [];
+  let filters = [];
+  let values = [];
   let index = 1;
 
   if (matricule) {
-    conditions.push(`p.matricule = $${index++}`);
-    params.push(matricule);
-  }
-  if (categorieId) {
-    conditions.push(`c.id = $${index++}`);
-    params.push(categorieId);
-  }
-  if (mois) {
-    conditions.push(`p.mois_paye = $${index++}`);
-    params.push(mois);
-  }
-  if (annee) {
-    conditions.push(`p.annee_paye = $${index++}`);
-    params.push(annee);
+    filters.push(`p.matricule = $${index++}`);
+    values.push(matricule);
   }
 
-  const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+  if (categorieId) {
+    filters.push(`c.id = $${index++}`);
+    values.push(categorieId);
+  }
+
+  if (mois) {
+    filters.push(`p.mois_paye = $${index++}`);
+    values.push(mois);
+  }
+
+  if (annee) {
+    filters.push(`p.annee_paye = $${index++}`);
+    values.push(annee);
+  }
+
+  const whereClause = filters.length ? `WHERE ${filters.join(' AND ')}` : '';
 
   const result = await db.query(`
-    SELECT p.matricule, a.nom, a.prenom, p.salaire_total as salaire,
-           p.mois_paye as mois, p.annee_paye as annee
+    SELECT p.matricule, a.nom, a.prenom, p.salaire_total AS salaire, p.mois_paye AS mois, p.annee_paye AS annee
     FROM paies p
     JOIN agents a ON a.id = p.id_agent
     JOIN categories c ON a.id_categorie = c.id
     ${whereClause}
     ORDER BY p.date DESC
-  `, params);
+  `, values);
 
-  const rows = result.rows;
-  const AllpaySlip = {};
-  rows.forEach(item => {
-    AllpaySlip[item.nom] = item;
+  const filtered = {};
+  result.rows.forEach(item => {
+    filtered[item.nom] = item;
   });
 
-  return AllpaySlip;
+  return filtered;
 };
